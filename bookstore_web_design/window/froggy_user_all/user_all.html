@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>froggy書局 | 會員中心</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif+TC:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#002046",
+                        "secondary": "#96490b",
+                        "background": "#fbf9f5",
+                        "surface": "#fbf9f5",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1c1a",
+                        "on-surface": "#1b1c1a",
+                        "on-surface-variant": "#44474e",
+                        "outline": "#74777f",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-container": "#efeeea",
+                        "surface-container-high": "#eae8e4",
+                        "surface-container-highest": "#e4e2de",
+                        "error": "#ba1a1a",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "Noto Serif TC", "serif"],
+                        "display": ["Newsreader", "Noto Serif TC", "serif"],
+                        "body": ["Manrope", "system-ui", "sans-serif"],
+                        "label": ["Manrope", "system-ui", "sans-serif"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f5;
+            font-family: 'Manrope', 'system-ui', sans-serif;
+            color: #1b1c1a;
+        }
+        h1, h2, h3, .serif-heading {
+            font-family: 'Newsreader', 'Noto Serif TC', serif;
+        }
+        .user-menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            z-index: 100;
+        }
+        .user-menu-container:hover .user-menu-dropdown {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Top Navigation Bar (Branding & Global Search) -->
+<nav class="fixed top-0 w-full z-50 bg-[#002046] border-b border-primary/20">
+<div class="flex justify-between items-center px-8 md:px-16 py-5 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-['Newsreader'] font-bold text-white" href="../froggy_main/mainscreen.html">froggy書局</a>
+</div>
+<div class="flex-grow max-w-2xl px-12 hidden md:block">
+<div class="flex items-center bg-white/10 px-6 py-3 rounded-full group focus-within:bg-white/20 transition-all border border-white/10 focus-within:border-white/30 shadow-sm">
+<span class="material-symbols-outlined text-white/50 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-body w-full px-4 text-white placeholder:text-white/40" placeholder="搜尋書名、作者、ISBN..." type="text"/>
+<button class="text-white/70 hover:text-white transition-transform hover:scale-110">
+<span class="material-symbols-outlined text-lg">search</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative user-menu-container">
+<a class="flex items-center gap-3 py-2 px-3 hover:bg-white/10 rounded-lg transition-all text-white" href="../../window_jp/froggy_login/login.html">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-bold tracking-widest">黃金會員</span>
+</a>
+<div class="user-menu-dropdown pt-2">
+<div class="w-56 bg-surface-container-lowest border border-outline-variant shadow-2xl rounded-xl overflow-hidden">
+<div class="p-5 border-b border-outline-variant bg-surface-container-low">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+</div>
+<div>
+<p class="text-xs font-bold text-primary">黃金會員</p>
+<p class="text-[10px] text-on-surface-variant">A. Sterling</p>
+</div>
+</div>
+</div>
+<div class="py-2">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span class="tracking-widest">總覽</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">local_shipping</span>
+<span class="tracking-widest">訂單狀態</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">library_books</span>
+<span class="tracking-widest">收藏書</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">manage_accounts</span>
+<span class="tracking-widest">會員資料</span>
+</a>
+</div>
+<div class="border-t border-outline-variant py-2 bg-surface-container-low/30">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-error hover:bg-error/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="tracking-widest font-bold">登出</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<a class="text-white/70 hover:text-white transition-all" href="../froggy_cart/cart.html">
+<span class="material-symbols-outlined">shopping_bag</span>
+</a>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-8 md:px-16 pt-32 pb-24">
+<!-- Header Section -->
+<header class="mb-12">
+<div class="flex items-end gap-3 mb-2">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Member Center</span>
+</div>
+<h1 class="text-5xl font-headline italic text-primary leading-tight mb-4">會員中心</h1>
+<p class="text-on-surface-variant font-body max-w-2xl text-sm tracking-wide">歡迎回到您的專屬空間。在此管理您的購入作品、個人帳戶資訊，並瀏覽您不斷豐富的私人典藏。</p>
+</header>
+<!-- Content Layout -->
+<div class="grid grid-cols-12 gap-12">
+<!-- Side Navigation -->
+<aside class="col-span-12 md:col-span-3">
+<div class="space-y-1">
+<a class="flex items-center gap-4 px-6 py-4 bg-primary text-on-primary rounded-xl font-bold transition-all shadow-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">總覽</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="local_shipping">local_shipping</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">訂單狀態</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="library_books">library_books</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">收藏書</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="manage_accounts">manage_accounts</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">會員資料</span>
+</a>
+<div class="h-8"></div>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-error/10 hover:text-error transition-all rounded-xl group" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">登出</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="col-span-12 md:col-span-9 space-y-16">
+<!-- Order Tracking Section -->
+<section>
+<div class="flex justify-between items-end mb-8 px-2">
+<div class="space-y-1">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Recent Purchases</span>
+<h2 class="text-3xl font-headline italic text-primary">近期購入</h2>
+</div>
+<span class="text-[10px] uppercase tracking-widest text-secondary font-bold cursor-pointer hover:underline">查看歷史紀錄</span>
+</div>
+<div class="bg-surface-container-lowest p-10 rounded-2xl border border-outline-variant/30 shadow-sm flex flex-col md:flex-row gap-10 items-center">
+<div class="w-40 h-52 bg-surface-container-high rounded overflow-hidden flex-shrink-0 shadow-xl">
+<img alt="order tracking thumbnail" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeCVif0RR_3jWe-Iyqn3Xs4Zzjrx0mS-lfWLvgqEq2mgTnHRbnx9ehDmuu4V_79A5Yki2_d-PG5ijLMt2C563mucQNzUba4rdFC9Wykay2lYeITsYw73CMtCL6DWDOVYDVsAr4cZH1HfkcJFof0SSSTDuo4lm218HSKP9XsrRTHPQdjMBHyQBUBs39GZOPvLVhauZliom79Hixd6tSIsStJQMeZ0wOg3qrd-PTtIE6WHAXNtfbFE2nsNX9SS6E_Z96IYP0ySlYftfh"/>
+</div>
+<div class="flex-grow space-y-6 w-full">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 mb-2">訂單編號 #ARC-88291</p>
+<h3 class="text-2xl font-headline italic text-primary">形式之煉金術：18 世紀手工裝訂</h3>
+</div>
+<div class="bg-secondary/10 text-secondary px-4 py-1.5 rounded-full text-[10px] uppercase font-bold tracking-widest border border-secondary/20">已出貨</div>
+</div>
+<!-- Stepper -->
+<div class="relative pt-6">
+<div class="absolute top-8 left-0 w-full h-[1px] bg-outline-variant"></div>
+<div class="absolute top-8 left-0 w-2/3 h-[1px] bg-secondary"></div>
+<div class="flex justify-between relative z-10">
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-secondary rounded-full ring-8 ring-surface-container-lowest"></div>
+<span class="text-[10px] mt-3 uppercase tracking-widest text-on-surface font-bold">未付款</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-secondary rounded-full ring-8 ring-surface-container-lowest"></div>
+<span class="text-[10px] mt-3 uppercase tracking-widest text-on-surface font-bold">已付款</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-secondary rounded-full ring-8 ring-surface-container-lowest"></div>
+<span class="text-[10px] mt-3 uppercase tracking-widest text-on-surface font-bold">已出貨</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 bg-outline-variant rounded-full ring-8 ring-surface-container-lowest"></div>
+<span class="text-[10px] mt-3 uppercase tracking-widest text-on-surface-variant">已完成</span>
+</div>
+</div>
+</div>
+<p class="text-[11px] text-on-surface-variant italic pt-4">預計送達日期：2024年10月24日，由皇家典藏快遞運送</p>
+</div>
+</div>
+</section>
+<!-- My Collection Section -->
+<section>
+<div class="flex justify-between items-end mb-8 px-2">
+<div class="space-y-1">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Personal Gallery</span>
+<h2 class="text-3xl font-headline italic text-primary">收藏書</h2>
+</div>
+<span class="text-[10px] uppercase tracking-widest text-secondary font-bold cursor-pointer hover:underline">查看完整目錄</span>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Book 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-high rounded-xl overflow-hidden mb-4 relative shadow-sm hover:shadow-xl transition-all duration-500">
+<img alt="collection book cover" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgWied0O24rJQXsDE-jtjQhBF5pnRbUxLpfzezhXdrpXHwZ_jhQOvo9CJ-3HPhOmiyTet20gh28GSUyx4PDFq2n9gRtUJYJ6vsbIS3i2MXskV3F_1AkriQzpUq9JMTUyd9n__3G8lXY6AxcEhOlWESCy2KqXD2my8WEWib66DgiTD6CwrlMWRtnPfyXysHEqDXkLoyKUCVsEWiLrWaaridGKngsk5TajRP14IeEA18xEaihXo3Cib60nImDzQGRz5mKS6TkWP96Br7"/>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">menu_book</span>
+</div>
+</div>
+<div class="mb-1 inline-block border border-error px-2 py-0.5 rounded text-[10px] text-error font-bold tracking-widest">LIMITED EDITION</div>
+<h4 class="text-sm font-bold text-primary truncate tracking-wide">深夜詩集</h4>
+<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Alexander Sterling</p>
+<p class="text-xs font-bold text-secondary mt-1">$4,200</p>
+</div>
+<!-- Book 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-high rounded-xl overflow-hidden mb-4 relative shadow-sm hover:shadow-xl transition-all duration-500">
+<img alt="collection book cover" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmhC7daJgzRxk5SNYDv32u7HbSSTv2JOptsSylzFs2ebeKWaP9Y77yzcihOLm96zX_qHfDGQGFKmojV8zq4gjnTe4xGg8tZF8qDyeps9kw4ZcOSnwN7ndEOL16iaG-AY9zRI6wOC2WBvGnQ9dtHzcm5f5L7M15H-VumRa_Hemk3AAEp_6h4EsqcaQonBcu3wisdVpqEIDmL1HFBbL3gkCnCk8l0Jqls112KSsn8gUlI-817yBFg44srO_O_xwZvoerwpvI8alqmKZo"/>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">menu_book</span>
+</div>
+</div>
+<div class="h-5"></div>
+<h4 class="text-sm font-bold text-primary truncate tracking-wide">現代主義圖書館</h4>
+<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Curated Collection</p>
+<p class="text-xs font-bold text-secondary mt-1">$1,850</p>
+</div>
+<!-- Book 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-high rounded-xl overflow-hidden mb-4 relative shadow-sm hover:shadow-xl transition-all duration-500">
+<img alt="collection book cover" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZvVSFx2fU0ufG-7KPJU0_UpoScm9mTy8zGH7S0YoTkldRWRf2f4NNCp7tsDjHGO-3tpgZtI0-GAl-TsvAtwbtHxJ7-TbfVvWz2uGyaQhX1tX1C-VrNi-ji5pp-8vM1mI3SV3fwsLEg2Xdpn8__2IF62aHkpzUioqZaIzT1Gtrtq36Id-sVqP4t91-fNG8pYwAvK5zqiBeJSk9K9hctUrQBfBEuw0mRrdPW-sq9Z0ARKu8BZJjG7Q55scXAnz_HvLjQWu-SdLy4dwN"/>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">menu_book</span>
+</div>
+</div>
+<div class="mb-1 inline-block border border-error px-2 py-0.5 rounded text-[10px] text-error font-bold tracking-widest">20% OFF</div>
+<h4 class="text-sm font-bold text-primary truncate tracking-wide">寂靜之城</h4>
+<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Elena Volkov</p>
+<p class="text-xs font-bold text-secondary mt-1">$2,900</p>
+</div>
+<!-- Empty Slot -->
+<div class="aspect-[3/4] border-2 border-dashed border-outline-variant/50 rounded-xl flex flex-col items-center justify-center group hover:border-secondary/50 hover:bg-surface-container-low transition-all cursor-pointer p-8 text-center">
+<span class="material-symbols-outlined text-outline-variant mb-3 group-hover:text-secondary group-hover:scale-110 transition-all" data-icon="add_circle">add_circle</span>
+<span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 group-hover:text-secondary">添加新購入作品</span>
+</div>
+</div>
+</section>
+<!-- Profile Section -->
+<section class="bg-surface-container-low/50 p-12 rounded-2xl border border-outline-variant/20">
+<div class="space-y-1 mb-10">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Information</span>
+<h2 class="text-3xl font-headline italic text-primary">會員資料</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+<div class="space-y-2">
+<p class="text-[10px] uppercase tracking-[0.25em] font-bold text-on-surface-variant/70">帳號 (Email)</p>
+<p class="p-4 bg-surface-container-lowest/50 border border-outline-variant/10 rounded-xl font-body text-sm text-primary">alexander.sterling@curated.com</p>
+</div>
+<div class="space-y-2">
+<p class="text-[10px] uppercase tracking-[0.25em] font-bold text-on-surface-variant/70">暱稱</p>
+<p class="p-4 bg-surface-container-lowest/50 border border-outline-variant/10 rounded-xl font-body text-sm text-primary">A. Sterling</p>
+</div>
+<div class="space-y-2">
+<p class="text-[10px] uppercase tracking-[0.25em] font-bold text-on-surface-variant/70">性別</p>
+<p class="p-4 bg-surface-container-lowest/50 border border-outline-variant/10 rounded-xl font-body text-sm text-primary">男</p>
+</div>
+<div class="space-y-2">
+<p class="text-[10px] uppercase tracking-[0.25em] font-bold text-on-surface-variant/70">電話</p>
+<p class="p-4 bg-surface-container-lowest/50 border border-outline-variant/10 rounded-xl font-body text-sm text-primary">+886 912-345-678</p>
+</div>
+<div class="md:col-span-2 space-y-2">
+<p class="text-[10px] uppercase tracking-[0.25em] font-bold text-on-surface-variant/70">地址</p>
+<p class="p-4 bg-surface-container-lowest/50 border border-outline-variant/10 rounded-xl font-body text-sm text-primary">110 台北市信義區菸廠路 88 號 12 樓</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#002046]">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center px-12 py-16 w-full max-w-screen-2xl mx-auto">
+<div class="space-y-4 mb-8 md:mb-0">
+<a class="text-xl font-bold text-white font-headline" href="#">froggy書局</a>
+<p class="text-white/70 font-body text-sm">© 2024 froggy書局. 始於筆墨，承載智慧。</p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4">
+<a class="text-white/70 font-body text-sm hover:text-secondary transition-colors" href="#">品牌理念</a>
+<a class="text-white/70 font-body text-sm hover:text-secondary transition-colors" href="#">關於我們</a>
+<a class="text-white/70 font-body text-sm hover:text-secondary transition-colors" href="#">配送政策</a>
+<a class="text-white/70 font-body text-sm hover:text-secondary transition-colors" href="#">隱私權條款</a>
+</div>
+<div class="mt-8 md:mt-0 flex gap-6">
+<span class="material-symbols-outlined text-white/50 hover:text-white cursor-pointer transition-colors">public</span>
+<span class="material-symbols-outlined text-white/50 hover:text-white cursor-pointer transition-colors">mail</span>
+<span class="material-symbols-outlined text-white/50 hover:text-white cursor-pointer transition-colors">share</span>
+</div>
+</div>
+</footer>
+</body></html>
