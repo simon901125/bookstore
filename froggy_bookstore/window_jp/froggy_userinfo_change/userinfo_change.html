@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>froggy書局 | 會員資料</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif+TC:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#002046",
+                        "secondary": "#96490b",
+                        "background": "#fbf9f5",
+                        "surface": "#fbf9f5",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1c1a",
+                        "on-surface": "#1b1c1a",
+                        "on-surface-variant": "#44474e",
+                        "outline": "#74777f",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-container": "#efeeea",
+                        "surface-container-high": "#eae8e4",
+                        "surface-container-highest": "#e4e2de",
+                        "error": "#ba1a1a",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "Noto Serif TC", "serif"],
+                        "display": ["Newsreader", "Noto Serif TC", "serif"],
+                        "body": ["Manrope", "system-ui", "sans-serif"],
+                        "label": ["Manrope", "system-ui", "sans-serif"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f5;
+            font-family: 'Manrope', 'system-ui', sans-serif;
+            color: #1b1c1a;
+        }
+        h1, h2, h3, .serif-heading {
+            font-family: 'Newsreader', 'Noto Serif TC', serif;
+        }
+        .user-menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            z-index: 100;
+        }
+        .user-menu-container:hover .user-menu-dropdown {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#002046] border-b border-primary/20">
+<div class="flex justify-between items-center px-8 md:px-16 py-5 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-['Newsreader'] font-bold text-white" href="#">froggy書局</a>
+</div>
+<div class="flex-grow max-w-2xl px-12 hidden md:block">
+<div class="flex items-center bg-white/10 px-6 py-3 rounded-full group focus-within:bg-white/20 transition-all border border-white/10 focus-within:border-white/30 shadow-sm">
+<span class="material-symbols-outlined text-white/50 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-body w-full px-4 text-white placeholder:text-white/40" placeholder="搜尋書名、作者、ISBN..." type="text"/>
+<button class="text-white/70 hover:text-white transition-transform hover:scale-110">
+<span class="material-symbols-outlined text-lg">search</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative user-menu-container">
+<button class="flex items-center gap-3 py-2 px-3 hover:bg-white/10 rounded-lg transition-all text-white">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-bold tracking-widest">黃金會員</span>
+</button>
+<div class="user-menu-dropdown pt-2">
+<div class="w-56 bg-surface-container-lowest border border-outline-variant shadow-2xl rounded-xl overflow-hidden">
+<div class="p-5 border-b border-outline-variant bg-surface-container-low">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+</div>
+<div>
+<p class="text-xs font-bold text-primary">黃金會員</p>
+<p class="text-[10px] text-on-surface-variant">A. Sterling</p>
+</div>
+</div>
+</div>
+<div class="py-2">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span class="tracking-widest">總覽</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">local_shipping</span>
+<span class="tracking-widest">訂單狀態</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">library_books</span>
+<span class="tracking-widest">收藏書</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">manage_accounts</span>
+<span class="tracking-widest">會員資料</span>
+</a>
+</div>
+<div class="border-t border-outline-variant py-2 bg-surface-container-low/30">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-error hover:bg-error/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="tracking-widest font-bold">登出</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<button class="text-white/70 hover:text-white">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-8 md:px-16 pt-32 pb-24">
+<!-- Header Section -->
+<header class="mb-12">
+<div class="flex items-end gap-3 mb-2">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Member Center</span>
+</div>
+<h1 class="text-5xl font-headline italic text-primary leading-tight mb-4">會員資料</h1>
+<p class="text-on-surface-variant font-body max-w-2xl text-sm tracking-wide">您的個人基本資訊、地址與帳戶安全性設置。</p>
+</header>
+<!-- Content Layout -->
+<div class="grid grid-cols-12 gap-12">
+<!-- Side Navigation -->
+<aside class="col-span-12 md:col-span-3">
+<div class="space-y-1">
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">總覽</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">local_shipping</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">訂單狀態</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">library_books</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">收藏書</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 bg-primary text-on-primary rounded-xl font-bold transition-all shadow-lg" href="#">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">會員資料</span>
+</a>
+<div class="h-8"></div>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-error/10 hover:text-error transition-all rounded-xl group" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">登出</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="col-span-12 md:col-span-9">
+<section class="flex flex-col gap-8">
+<!-- Form Card -->
+<div class="bg-surface-container-lowest p-10 rounded-2xl border border-outline-variant/30 shadow-sm">
+<div class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">帳號 (Email)</label>
+<div class="px-1 py-2 font-body text-sm text-on-surface/60">curator@froggybooks.com</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">暱稱</label>
+<div class="px-1 py-2 font-body text-sm text-on-surface">書海漫步者</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">性別</label>
+<div class="px-1 py-2 font-body text-sm text-on-surface">男性</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">出生日期</label>
+<div class="px-1 py-2 font-body text-sm text-on-surface">1990-01-01</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">電話</label>
+<div class="px-1 py-2 font-body text-sm text-on-surface">0912-345-678</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">安全性提示問題</label>
+<div class="space-y-1">
+<div class="px-1 py-2 font-body text-sm text-on-surface">您最喜歡的一本書是什麼？</div>
+<div class="px-1 py-2 font-body text-sm text-on-surface tracking-widest">********</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">地址</label>
+<div class="px-1 py-2 font-body text-sm text-on-surface leading-relaxed">台北市大安區忠孝東路四段 88 號 12 樓</div>
+</div>
+<div class="pt-8 border-t border-outline-variant/10 flex flex-col lg:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4 text-on-surface-variant mr-auto">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+<span class="text-[11px] font-body uppercase tracking-widest">您的個人資料受到高強度加密保護。</span>
+</div>
+<div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+<button class="flex-1 lg:flex-none px-6 py-4 bg-surface-container-high text-primary font-label text-[10px] font-bold uppercase tracking-widest hover:bg-surface-container-highest transition-all rounded" onclick="document.getElementById('edit-profile-modal').classList.remove('hidden')" type="button">
+                                    變更密碼
+                                </button>
+<button class="flex-1 lg:flex-none px-6 py-4 bg-surface-container-high text-primary font-label text-[10px] font-bold uppercase tracking-widest hover:bg-surface-container-highest transition-all rounded" onclick="document.getElementById('edit-profile-modal').classList.remove('hidden')" type="button">
+                                    修改安全性問題
+                                </button>
+<button class="w-full lg:w-auto px-12 py-4 bg-primary text-white font-label text-xs font-bold uppercase tracking-[0.2em] hover:opacity-90 active:scale-95 transition-all shadow-lg rounded" onclick="document.getElementById('edit-profile-modal').classList.remove('hidden')" type="button">
+                                    更新資料
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#002046]">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center px-12 py-16 w-full max-w-screen-2xl mx-auto">
+<div class="space-y-4 mb-8 md:mb-0">
+<a class="text-xl font-bold text-white font-headline" href="#">froggy書局</a>
+<p class="text-white/70 font-body text-sm">© 2024 froggy書局. 始於筆墨，承載智慧。</p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4">
+</div>
+<div class="mt-8 md:mt-0 flex gap-6">
+</div></div>
+</footer>
+<!-- Modal: Update Member Info -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-4" id="edit-profile-modal">
+<!-- Dark semi-transparent overlay -->
+<div class="fixed inset-0 bg-primary/60 backdrop-blur-[4px]" onclick="document.getElementById('edit-profile-modal').classList.add('hidden')"></div>
+<!-- Modal Container -->
+<div class="relative bg-surface w-full max-w-xl rounded-xl shadow-[0_24px_64px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col z-10">
+<!-- Modal Header -->
+<div class="bg-primary px-10 py-8 flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<h2 class="text-white text-2xl font-headline italic tracking-wide">修改會員資料 (UPDATE MEMBER INFO)</h2>
+</div>
+<button class="text-white/60 hover:text-white transition-colors material-symbols-outlined mt-1" onclick="document.getElementById('edit-profile-modal').classList.add('hidden')">close</button>
+</div>
+<!-- Modal Content: Update Form -->
+<div class="p-10 space-y-8 bg-surface">
+<form class="space-y-6">
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70" for="nickname-edit">暱稱 / NICKNAME</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-1 focus:ring-primary rounded-lg font-body text-sm px-5 py-4 transition-all" id="nickname-edit" type="text" value="書海漫步者"/>
+</div>
+<div class="flex flex-col gap-3">
+<label class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">性別 / GENDER</label>
+<div class="flex flex-wrap gap-8">
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="w-4 h-4 text-primary border-outline-variant focus:ring-primary/20" name="gender-edit" type="radio"/>
+<span class="font-body text-sm text-on-surface">男 / Male</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="w-4 h-4 text-primary border-outline-variant focus:ring-primary/20" name="gender-edit" type="radio"/>
+<span class="font-body text-sm text-on-surface">女 / Female</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="w-4 h-4 text-primary border-outline-variant focus:ring-primary/20" name="gender-edit" type="radio"/>
+<span class="font-body text-sm text-on-surface">不透露 / Secret</span>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">生日 / BIRTHDAY</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-1 focus:ring-primary rounded-lg font-body text-sm px-5 py-4 transition-all" type="date" value="1990-01-01"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">電話 / PHONE</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-1 focus:ring-primary rounded-lg font-body text-sm px-5 py-4 transition-all" type="tel" value="0912-345-678"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">住址 / ADDRESS</label>
+<textarea class="w-full bg-surface-container-low border-none focus:ring-1 focus:ring-primary rounded-lg font-body text-sm px-5 py-4 transition-all min-h-[100px] resize-none">台北市大安區忠孝東路四段 88 號 12 樓</textarea>
+</div>
+<div class="pt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-outline-variant/10">
+<button class="flex-1 px-8 py-4 bg-surface-container-high text-on-surface-variant hover:bg-error hover:text-white transition-all rounded font-label text-xs font-bold uppercase tracking-[0.2em]" onclick="document.getElementById('edit-profile-modal').classList.add('hidden')" type="button">
+                        取消 / CANCEL
+                    </button>
+<button class="flex-1 px-8 py-4 bg-primary text-white hover:bg-[#00152e] rounded font-label text-xs font-bold uppercase tracking-[0.2em] active:scale-95 transition-all shadow-lg shadow-primary/20" onclick="location.reload()" type="button">
+                        儲存修改 / SAVE CHANGES
+                    </button>
+</div>
+</form>
+</div>
+<!-- Aesthetic Accent Line -->
+<div class="h-1 bg-gradient-to-r from-primary/20 via-secondary/40 to-primary/20 relative z-10"></div>
+</div>
+</div>
+</body></html>

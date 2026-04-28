@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Froggy Bookstore - Reset Security Question</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400;1,6..72,700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#002046",
+                        secondary: "#96490b",
+                        background: "#fbf9f5",
+                        surface: "#fbf9f5",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1b1c1a",
+                        "on-surface-variant": "#44474e",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-container-highest": "#e4e2de",
+                        error: "#ba1a1a",
+                    },
+                    fontFamily: {
+                        headline: ["Newsreader"],
+                        body: ["Manrope"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: "Manrope", sans-serif; background-color: #fbf9f5; }
+        .font-newsreader { font-family: "Newsreader", serif; }
+    </style>
+</head>
+<body class="min-h-screen relative overflow-hidden flex flex-col justify-center items-center p-4">
+    <!-- Blurred Background -->
+    <div class="absolute inset-0 z-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuCvJ7t0lY2h983LUX9aqisG0Kdh9s7Fq9ZtpTZbSL3A6m8J46LFCYuC6DZl9UIGuX5mOMxMR0ZA0biv5PVUusYm6z5D3HJvsySF1xv-YVXG5cY1coHKeHLK2BeFljJ9Gl6RcF77KEYy3-bR9GjmOh3QUBGAX5pXJeurKtyrl0Eba0msBXRZrO5LmD5Z69x4d8UpZtTbWeRWFAliLc3Uu2No5OyXvwTYEfYCwybSCibEfyqMABkN2xvs_Yv7arKTswlg-Efv3LjFAiBr')] bg-cover bg-center filter blur-lg opacity-30"></div>
+    
+    <div class="relative z-10 w-full max-w-md bg-white rounded-xl shadow-2xl overflow-hidden border border-primary/10">
+        <!-- Header -->
+        <div class="bg-primary p-8 text-white">
+            <h2 class="text-2xl font-newsreader italic">重設安全性問題</h2>
+            <p class="text-[10px] opacity-60 uppercase tracking-widest mt-1">RESET SECURITY QUESTION</p>
+        </div>
+
+        <div class="p-8 space-y-8">
+            <!-- Step 1: Email -->
+            <div id="step-1" class="space-y-6">
+                <p class="text-sm text-on-surface-variant leading-relaxed">請輸入您的註冊電子郵件以驗證身分。</p>
+                <div class="space-y-2">
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">Email Address</label>
+                    <input id="verify-email" class="w-full bg-surface-container-low border-none rounded py-3 px-4 text-sm focus:ring-1 focus:ring-primary transition-all" type="email" placeholder="example@mail.com"/>
+                </div>
+                <button onclick="handleVerifyEmail()" class="w-full bg-primary text-white py-4 rounded font-bold text-xs tracking-widest hover:bg-secondary transition-all">下一步 / NEXT</button>
+            </div>
+
+            <!-- Step 2: New Question -->
+            <div id="step-2" class="space-y-6 hidden">
+                <p class="text-sm text-on-surface-variant leading-relaxed">驗證成功。請選擇新的安全性問題並設定答案。</p>
+                <div class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">新的安全性問題</label>
+                        <select id="new-question" class="w-full bg-surface-container-low border-none rounded py-3 px-4 text-sm focus:ring-1 focus:ring-primary">
+                            <option value="q1">您第一所就讀的小學名稱？</option>
+                            <option value="q2">您最喜歡的一本書？</option>
+                            <option value="q3">您兒時的寵物名字？</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">新的答案 (不會顯示舊答案)</label>
+                        <input id="new-answer" class="w-full bg-surface-container-low border-none rounded py-3 px-4 text-sm focus:ring-1 focus:ring-primary" type="text" placeholder="請輸入新答案"/>
+                    </div>
+                </div>
+                <button onclick="handleResetQuestion()" class="w-full bg-primary text-white py-4 rounded font-bold text-xs tracking-widest hover:bg-secondary transition-all">更新設定 / UPDATE</button>
+            </div>
+        </div>
+
+        <div class="bg-surface-container-low p-4 text-center">
+            <button onclick="history.back()" class="text-xs text-on-surface-variant hover:text-primary transition-colors">取消並返回 / CANCEL</button>
+        </div>
+    </div>
+
+    <script>
+        let matchedMember = null;
+
+        async function handleVerifyEmail() {
+            const email = document.getElementById('verify-email').value.trim().toLowerCase();
+            if (!email) { alert('請輸入電子郵件。'); return; }
+
+            try {
+                const response = await fetch('../../python/member.json', { cache: 'no-store' });
+                const members = await response.json();
+                matchedMember = members.find(m => m.email.toLowerCase() === email);
+
+                if (matchedMember) {
+                    document.getElementById('step-1').classList.add('hidden');
+                    document.getElementById('step-2').classList.remove('hidden');
+                } else {
+                    alert('找不到此帳號，請重新確認。');
+                }
+            } catch (e) {
+                alert('系統錯誤，請稍後再試。');
+            }
+        }
+
+        async function handleResetQuestion() {
+            const question = document.getElementById('new-question').value;
+            const answer = document.getElementById('new-answer').value.trim();
+
+            if (!answer) { alert('請輸入答案。'); return; }
+
+            try {
+                const response = await fetch('/api/update-member', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: matchedMember.email,
+                        securityQuestion: question,
+                        securityAnswer: answer
+                    })
+                });
+
+                const result = await response.json();
+                if (result.ok) {
+                    alert('安全性問題已成功重設！');
+                    window.location.href = '../../window/froggy_user_info/user_info.html';
+                } else {
+                    alert('更新失敗：' + result.message);
+                }
+            } catch (e) {
+                alert('伺服器連線失敗。');
+            }
+        }
+    </script>
+</body>
+</html>

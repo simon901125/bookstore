@@ -1,0 +1,24 @@
+[
+  {
+    "email": "simon901125@gmail.com",
+    "password": "Simon901125",
+    "nickname": "froggy",
+    "gender": "male",
+    "birthday": "2001-11-25",
+    "phone": "0976984911",
+    "address": "台中市西屯區何仁里永昌一街17號14樓之3",
+    "securityQuestion": "q3",
+    "securityAnswer": "roger"
+  },
+  {
+    "email": "simon9011256@gmail.com",
+    "password": "Simon610102",
+    "nickname": "張丞志",
+    "gender": "male",
+    "birthday": "2026-04-01",
+    "phone": "0936429911",
+    "address": "台中市西屯區何仁里永昌一街17號14樓之3",
+    "securityQuestion": "q1",
+    "securityAnswer": "asd"
+  }
+]

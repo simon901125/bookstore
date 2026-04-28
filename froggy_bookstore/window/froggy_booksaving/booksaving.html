@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>froggy書局 | 收藏書</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif+TC:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#002046",
+                        "secondary": "#96490b",
+                        "background": "#fbf9f5",
+                        "surface": "#fbf9f5",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1c1a",
+                        "on-surface": "#1b1c1a",
+                        "on-surface-variant": "#44474e",
+                        "outline": "#74777f",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-container": "#efeeea",
+                        "surface-container-high": "#eae8e4",
+                        "surface-container-highest": "#e4e2de",
+                        "error": "#ba1a1a",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "Noto Serif TC", "serif"],
+                        "display": ["Newsreader", "Noto Serif TC", "serif"],
+                        "body": ["Manrope", "system-ui", "sans-serif"],
+                        "label": ["Manrope", "system-ui", "sans-serif"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f5;
+            font-family: 'Manrope', 'system-ui', sans-serif;
+            color: #1b1c1a;
+        }
+        h1, h2, h3, .serif-heading {
+            font-family: 'Newsreader', 'Noto Serif TC', serif;
+        }
+        .user-menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            z-index: 100;
+        }
+        .user-menu-container:hover .user-menu-dropdown {
+            display: block;
+        }
+        .book-card-shadow {
+            box-shadow: 0 12px 40px rgba(27, 28, 26, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Top Navigation Bar (Branding & Global Search) -->
+<nav class="fixed top-0 w-full z-50 bg-[#002046] border-b border-primary/20">
+<div class="flex justify-between items-center px-8 md:px-16 py-5 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-['Newsreader'] font-bold text-white" href="../froggy_main/mainscreen.html">froggy書局</a>
+</div>
+<div class="flex-grow max-w-2xl px-12 hidden md:block">
+<div class="flex items-center bg-white/10 px-6 py-3 rounded-full group focus-within:bg-white/20 transition-all border border-white/10 focus-within:border-white/30 shadow-sm">
+<span class="material-symbols-outlined text-white/50 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-body w-full px-4 text-white placeholder:text-white/40" placeholder="搜尋書名、作者、ISBN..." type="text"/>
+<button class="text-white/70 hover:text-white transition-transform hover:scale-110">
+<span class="material-symbols-outlined text-lg">search</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative user-menu-container order-2">
+<a class="flex items-center gap-3 py-2 px-3 hover:bg-white/10 rounded-lg transition-all text-white" href="../../window_jp/froggy_login/login.html">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-bold tracking-widest">黃金會員</span>
+</a>
+<div class="user-menu-dropdown pt-2">
+<div class="w-56 bg-surface-container-lowest border border-outline-variant shadow-2xl rounded-xl overflow-hidden">
+<div class="p-5 border-b border-outline-variant bg-surface-container-low">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+</div>
+<div>
+<p class="text-xs font-bold text-primary">黃金會員</p>
+<p class="text-[10px] text-on-surface-variant">A. Sterling</p>
+</div>
+</div>
+</div>
+<div class="py-2">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span class="tracking-widest">總覽</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">local_shipping</span>
+<span class="tracking-widest">訂單詳情</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">library_books</span>
+<span class="tracking-widest">收藏書</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">manage_accounts</span>
+<span class="tracking-widest">會員資料修改</span>
+</a>
+</div>
+<div class="border-t border-outline-variant py-2 bg-surface-container-low/30">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-error hover:bg-error/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="tracking-widest font-bold">登出</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<a class="text-white/70 hover:text-white transition-colors order-1" href="../froggy_cart/cart.html">
+<span class="material-symbols-outlined">shopping_bag</span>
+</a>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-8 md:px-16 pt-32 pb-24">
+<!-- Header Section -->
+<header class="mb-12">
+<div class="flex items-end gap-3 mb-2">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Member Center</span>
+</div>
+<h1 class="text-5xl font-headline italic text-primary leading-tight mb-4">收藏書</h1>
+<p class="text-on-surface-variant font-body max-w-2xl text-sm tracking-wide">The Curated Archive — Your Personal Selection</p>
+</header>
+<!-- Content Layout -->
+<div class="grid grid-cols-12 gap-12">
+<!-- Side Navigation -->
+<aside class="col-span-12 md:col-span-3">
+<div class="space-y-1">
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_user_all/user_all.html">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">總覽</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_order/order.html">
+<span class="material-symbols-outlined group-hover:text-primary">receipt_long</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">訂單詳情</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 bg-primary text-on-primary rounded-xl font-bold transition-all shadow-lg" href="../froggy_booksaving/booksaving.html">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">收藏書</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_user_info/user_info.html">
+<span class="material-symbols-outlined group-hover:text-primary">edit_note</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">會員資料修改</span>
+</a>
+<div class="h-8"></div>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-error/10 hover:text-error transition-all rounded-xl group" href="#" data-auth-logout>
+<span class="material-symbols-outlined">logout</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">登出</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area: Book Collection Grid -->
+<div class="col-span-12 md:col-span-9">
+<div id="savedBooksGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16">
+<!-- Book 1 -->
+<div class="group flex flex-col">
+<div class="relative mb-6 aspect-[2/3] overflow-hidden rounded-lg bg-surface-container-low transition-transform duration-500 group-hover:-translate-y-2 book-card-shadow">
+<img class="w-full h-full object-cover" data-alt="minimalist book cover of 'The Great Gatsby' with art deco gold foil lines on a deep green background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCHrToijYjb-VT1veAlLEp1ppYVR5PrlqjC2wt8q6NG6HI0H_HzxVSJxgqgEFfTR34C_7l5uykip7t1R1MZ1ouif0jtZamah_ng8M7hB09oWby67XVXegc0FQpxjU9diHpi6R5gO1J2Ylbk4PAd36wJlNJqiz6YQ3NCgeKr599CDP7F3uJ7RtKtNmvTZB14SO5_3ua7KORiRZO4qrmgpJnAg1E9O5t2hhsep0Z-1AYoqL9XoDi5Zwo52WFvJHNW9WLH4yMSp6feZ0i"/>
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300"></div>
+</div>
+<div class="space-y-3">
+<span class="inline-block px-2 py-0.5 border border-error text-error text-[10px] font-bold tracking-widest uppercase rounded-none">限時優惠</span>
+<h3 class="text-xl font-headline font-bold text-primary leading-tight">大亨小傳</h3>
+<p class="text-sm text-on-surface-variant font-label italic">F. Scott Fitzgerald</p>
+<div class="flex items-end gap-2">
+<span class="text-lg font-bold text-secondary">NT$ 380</span>
+<span class="text-xs text-on-surface-variant/50 line-through mb-1">NT$ 450</span>
+</div>
+</div>
+</div>
+<!-- Book 2 -->
+<div class="group flex flex-col">
+<div class="relative mb-6 aspect-[2/3] overflow-hidden rounded-lg bg-surface-container-low transition-transform duration-500 group-hover:-translate-y-2 book-card-shadow">
+<img class="w-full h-full object-cover" data-alt="classic leather-bound book cover with intricate gold embossing and aged paper texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXrlaf6wddRZtnT1sAxhtXqYBtunwRauq1hH5uv6ai9vALOrNXmSLvHeSAwIujitD7CJO1EkAVZpyeH4Lmkr9BCJ_JNCLVFWlUDFpsXKTxVMM7JZOuIMrWo2ZZiElRPZvQpQklIa5vHk_m9SXO5KtCofmOdiSamqZOHJZKRT7VU_s9vjSSYuVIOJ2EmYW_jn7kcx_IQkD1_MYXthtY4EYLZIR0GmmYdwHsaF3mcDlNazczzffC3bCwpBDvg1aXpXwxXOIRQ6WqsLRm"/>
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300"></div>
+</div>
+<div class="space-y-3">
+<span class="inline-block px-2 py-0.5 border border-error text-error text-[10px] font-bold tracking-widest uppercase rounded-none">絕版珍藏</span>
+<h3 class="text-xl font-headline font-bold text-primary leading-tight">傲慢與偏見</h3>
+<p class="text-sm text-on-surface-variant font-label italic">Jane Austen</p>
+<div class="flex items-end gap-2">
+<span class="text-lg font-bold text-secondary">NT$ 520</span>
+</div>
+</div>
+</div>
+<!-- Book 3 -->
+<div class="group flex flex-col">
+<div class="relative mb-6 aspect-[2/3] overflow-hidden rounded-lg bg-surface-container-low transition-transform duration-500 group-hover:-translate-y-2 book-card-shadow">
+<img class="w-full h-full object-cover" data-alt="modern typography book cover with bold black serif text on a cream textured paper background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3DovbeAnBdjR_-BNUpIDO23R5M9vaMvGDbpv09ftMaO9R7BxdU_COotb6R71vY8vOM-FY0dLUR2TB93qGnDQdvLKFSeM84KWGyGfgizgfuxUwQWVInAIeEefs0eXp1cpS3H-FjkTE46VE6FODbQuTNK3b75EIDcNNZyCqsLjiYmuCjJO20f2FwaxN3RaMSdkCtNmpmP_dit11OdUtx3oF6UJDSBIPhWzSJui2pHb0UE15DORX_LwAbthUUjW2KHo8jJoyH4LxxtJq"/>
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300"></div>
+</div>
+<div class="space-y-3">
+<span class="inline-block px-2 py-0.5 border border-error text-error text-[10px] font-bold tracking-widest uppercase rounded-none">熱門推薦</span>
+<h3 class="text-xl font-headline font-bold text-primary leading-tight">百年孤寂</h3>
+<p class="text-sm text-on-surface-variant font-label italic">Gabriel García Márquez</p>
+<div class="flex items-end gap-2">
+<span class="text-lg font-bold text-secondary">NT$ 425</span>
+<span class="text-xs text-on-surface-variant/50 line-through mb-1">NT$ 500</span>
+</div>
+</div>
+</div>
+<!-- Book 4 -->
+<div class="group flex flex-col">
+<div class="relative mb-6 aspect-[2/3] overflow-hidden rounded-lg bg-surface-container-low transition-transform duration-500 group-hover:-translate-y-2 book-card-shadow">
+<img class="w-full h-full object-cover" data-alt="minimalist white book cover with a single blue watercolor brush stroke in the center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8eBQR5j08bwuNFgiSDW0ig6eUKR7WrARk9n3VJ-XlMmhFIP6T6KrzJh7gdytR_lYjwCt217e9iX7662j2Ja3TAHIvPFNsIiq3pIJnf9JamBPBL3PdvedhC3rhTeRy_RAgf8w9hBMABJxk690-fbcFiGncVob-Xu_Vhst2B83l403YudMnh7S8cUoOZN6j_6nBWMwgL32hCugIBmH-CCdbNyZvSF9uw5agkB8VXd8F8MERL-S5rLo3Se2_nYn37l2RwAcEvwboXTho"/>
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300"></div>
+</div>
+<div class="space-y-3">
+<span class="inline-block px-2 py-0.5 border border-error text-error text-[10px] font-bold tracking-widest uppercase rounded-none">會員獨享</span>
+<h3 class="text-xl font-headline font-bold text-primary leading-tight">異鄉人</h3>
+<p class="text-sm text-on-surface-variant font-label italic">Albert Camus</p>
+<div class="flex items-end gap-2">
+<span class="text-lg font-bold text-secondary">NT$ 315</span>
+<span class="text-xs text-on-surface-variant/50 line-through mb-1">NT$ 350</span>
+</div>
+</div>
+</div>
+<!-- Book 5 -->
+<div class="group flex flex-col">
+<div class="relative mb-6 aspect-[2/3] overflow-hidden rounded-lg bg-surface-container-low transition-transform duration-500 group-hover:-translate-y-2 book-card-shadow">
+<img class="w-full h-full object-cover" data-alt="abstract architectural book cover with shadows and clean geometrical lines in monochromatic tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiu52tz1khdV6rboxOzSO1W3aBtTah74rokCP58qIj-koAf_J4ebhceSFFX9GCCzLrlyLI3SFZo1r1dyBhgODxQQWHwUFUm7bHrYkd2JKtusWh7PWhu5i386iSszsqq2OA7Xll4VhSs_ggej3YIlAEPlUl5d0dlB2fb_tyfjasWdzAivRDtZslX37VvyWShNC-DFyji0QQ13U-bDOB_BFm2DJY6rnMGtMy4wQJPeeEDCnOn8D1Z6vBiyvJ7MpmB18Y5rF-i32NC12y"/>
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300"></div>
+</div>
+<div class="space-y-3">
+<span class="inline-block px-2 py-0.5 border border-error text-error text-[10px] font-bold tracking-widest uppercase rounded-none">限量特惠</span>
+<h3 class="text-xl font-headline font-bold text-primary leading-tight">源泉</h3>
+<p class="text-sm text-on-surface-variant font-label italic">Ayn Rand</p>
+<div class="flex items-end gap-2">
+<span class="text-lg font-bold text-secondary">NT$ 680</span>
+</div>
+</div>
+</div>
+<!-- Book 6 -->
+<div class="group flex flex-col">
+<div class="relative mb-6 aspect-[2/3] overflow-hidden rounded-lg bg-surface-container-low transition-transform duration-500 group-hover:-translate-y-2 book-card-shadow">
+<img class="w-full h-full object-cover" data-alt="stack of vintage books with worn linen covers in soft morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeIgHPch2sBmqjrExgks9R_KuSc99iDRaNP2Aq-fn_0_ZHYPsewKaBsRHIfBEaP-pkbaAAdK0FRHIe09_9bqaQoTBYy4fNGoS3FWPC0NJWQp9Wj6jRfmNRq5hcg8pEhHoj-8-fWW9U1nG7BD-XAgeVS5O-gtelrk5L1e-GIxctPB5-FKgx0stz3rpfv3f_VLt3jGVXSQgx1A-wmm8aZ7y4KXBf73J771_-lHdz2AjILqTaZKR96GbW04YieVLgHQUtsGGclBvvoQ5o"/>
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300"></div>
+</div>
+<div class="space-y-3">
+<span class="inline-block px-2 py-0.5 border border-error text-error text-[10px] font-bold tracking-widest uppercase rounded-none">新書預購</span>
+<h3 class="text-xl font-headline font-bold text-primary leading-tight">流動的饗宴</h3>
+<p class="text-sm text-on-surface-variant font-label italic">Ernest Hemingway</p>
+<div class="flex items-end gap-2">
+<span class="text-lg font-bold text-secondary">NT$ 360</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#002046]">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center px-12 py-16 w-full max-w-screen-2xl mx-auto">
+<div class="space-y-4 mb-8 md:mb-0">
+<a class="text-xl font-bold text-white font-headline" href="#">froggy書局</a>
+<p class="text-white/70 font-body text-sm">© 2024 froggy書局. 始於筆墨，承載智慧。</p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4">
+</div>
+<div class="mt-8 md:mt-0 flex gap-6">
+</div></div>
+</footer>
+<script>
+const BOOKS_JSON_URL = "../../python/books.json";
+const SAVING_BOOKS_JSON_URL = "../../python/member_savingbooks.json";
+const SAVING_BOOKS_API_URL = "/api/saving-books";
+const CURRENT_MEMBER_KEY = "froggyCurrentMember";
+
+function getCurrentMember() {
+  try {
+    const member = JSON.parse(localStorage.getItem(CURRENT_MEMBER_KEY) || "null");
+    return member && member.email ? member : null;
+  } catch {
+    return null;
+  }
+}
+
+function parseDiscountRate(label) {
+  const match = String(label || "").match(/^(\d+)\u6298$/);
+  if (!match) return null;
+  const discountNumber = Number(match[1]);
+  return discountNumber >= 10 ? discountNumber / 100 : discountNumber / 10;
+}
+
+function getDiscountedPrice(book) {
+  const price = Number(book.price || 0);
+  const discountRate = parseDiscountRate(book.promotionLabel);
+  return discountRate && discountRate < 1 ? Math.round(price * discountRate) : price;
+}
+
+function formatPrice(price) {
+  return `NT$ ${Number(price || 0).toLocaleString("zh-TW")}`;
+}
+
+function createSavedBookCard(book) {
+  const card = document.createElement("div");
+  card.className = "group flex flex-col";
+  card.dataset.savedBookIsbn = book.isbn;
+
+  const finalPrice = getDiscountedPrice(book);
+  const hasDiscount = finalPrice < Number(book.price || 0);
+  const badge = book.promotionLabel
+    ? `<span class="inline-block px-2 py-0.5 border border-error text-error text-[10px] font-bold tracking-widest uppercase rounded-none">${book.promotionLabel}</span>`
+    : "";
+  const originalPrice = hasDiscount
+    ? `<span class="text-xs text-on-surface-variant/50 line-through mb-1">${formatPrice(book.price)}</span>`
+    : "";
+
+  card.innerHTML = `
+    <div class="relative mb-6 aspect-[2/3] overflow-hidden rounded-lg bg-surface-container-low transition-transform duration-500 group-hover:-translate-y-2 book-card-shadow">
+      <a class="block w-full h-full" href="../froggy_bookPage/bookPage.html?isbn=${encodeURIComponent(book.isbn)}">
+        <img class="w-full h-full object-cover" alt="${book.title || "收藏書封面"}" src="${book.coverUrl || "../../bookstore_DB/bookPicture/getImage.png"}"/>
+        <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300"></div>
+      </a>
+      <button
+        class="absolute left-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-error shadow-lg transition-transform hover:scale-105"
+        type="button"
+        data-remove-saving
+        aria-label="移除收藏"
+        title="移除收藏"
+      >
+        <span class="material-symbols-outlined text-xl" style="font-variation-settings: &quot;FILL&quot; 1">favorite</span>
+      </button>
+    </div>
+    <a class="space-y-3 block" href="../froggy_bookPage/bookPage.html?isbn=${encodeURIComponent(book.isbn)}">
+      ${badge}
+      <h3 class="text-xl font-headline font-bold text-primary leading-tight line-clamp-2">${book.title || "未命名書籍"}</h3>
+      <p class="text-sm text-on-surface-variant font-label italic">${book.author || "Unknown author"}</p>
+      <div class="flex items-end gap-2">
+        <span class="text-lg font-bold text-secondary">${formatPrice(finalPrice)}</span>
+        ${originalPrice}
+      </div>
+    </a>
+  `;
+
+  card.querySelector("[data-remove-saving]")?.addEventListener("click", () =>
+    removeSavedBook(book.isbn, card),
+  );
+  return card;
+}
+
+async function removeSavedBook(isbn, card) {
+  const member = getCurrentMember();
+  if (!member) return;
+
+  try {
+    const response = await fetch(SAVING_BOOKS_API_URL, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: member.email, isbn }),
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "移除收藏失敗，請稍後再試。");
+    }
+
+    card.remove();
+    if (!document.querySelector("[data-saved-book-isbn]")) {
+      renderEmptySavedBooks("目前尚未收藏任何書籍。");
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+function renderEmptySavedBooks(message) {
+  const grid = document.getElementById("savedBooksGrid");
+  if (!grid) return;
+  grid.className = "min-h-[18rem] flex items-center justify-center rounded-2xl border border-dashed border-outline-variant/60 bg-surface-container-low/40";
+  grid.innerHTML = `<p class="font-body text-sm text-on-surface-variant">${message}</p>`;
+}
+
+async function renderSavedBooks() {
+  const grid = document.getElementById("savedBooksGrid");
+  const member = getCurrentMember();
+  if (!grid || !member) return;
+
+  try {
+    const [booksResponse, savingResponse] = await Promise.all([
+      fetch(BOOKS_JSON_URL, { cache: "no-store" }),
+      fetch(SAVING_BOOKS_JSON_URL, { cache: "no-store" }),
+    ]);
+    const books = booksResponse.ok ? await booksResponse.json() : [];
+    const savingRecords = savingResponse.ok ? await savingResponse.json() : [];
+    const record = Array.isArray(savingRecords)
+      ? savingRecords.find((item) => String(item.email || "").toLowerCase() === member.email.toLowerCase())
+      : null;
+    const savedIsbns = Array.isArray(record?.isbns) ? record.isbns : [];
+    const savedBooks = savedIsbns
+      .map((isbn) => books.find((book) => book.isbn === isbn))
+      .filter(Boolean);
+
+    if (!savedBooks.length) {
+      renderEmptySavedBooks("目前尚未收藏任何書籍。");
+      return;
+    }
+
+    grid.replaceChildren(...savedBooks.map(createSavedBookCard));
+  } catch (error) {
+    console.error("Failed to render saved books:", error);
+    renderEmptySavedBooks("收藏書載入失敗，請稍後再試。");
+  }
+}
+
+renderSavedBooks();
+</script>
+<script src="../../bookstore_JS/auth.js"></script>
+</body></html>

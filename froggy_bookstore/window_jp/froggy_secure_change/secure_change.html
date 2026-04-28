@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>froggy書局 | 修改帳戶資料</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif+TC:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#002046",
+                        "secondary": "#96490b",
+                        "background": "#fbf9f5",
+                        "surface": "#fbf9f5",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1c1a",
+                        "on-surface": "#1b1c1a",
+                        "on-surface-variant": "#44474e",
+                        "outline": "#74777f",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-container": "#efeeea",
+                        "surface-container-high": "#eae8e4",
+                        "surface-container-highest": "#e4e2de",
+                        "error": "#ba1a1a",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "Noto Serif TC", "serif"],
+                        "display": ["Newsreader", "Noto Serif TC", "serif"],
+                        "body": ["Manrope", "system-ui", "sans-serif"],
+                        "label": ["Manrope", "system-ui", "sans-serif"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Newsreader', 'Noto Serif TC', serif; }
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2344474e'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.25rem center;
+            background-size: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen overflow-hidden">
+<!-- Background: Member Profile Screen (SCREEN_32) -->
+<div class="fixed inset-0 z-0 overflow-auto">
+<!-- Nav from SCREEN_32 -->
+<nav class="sticky top-0 w-full z-50 bg-[#002046] border-b border-primary/20">
+<div class="flex justify-between items-center px-8 md:px-16 py-5 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-12">
+<div class="text-2xl font-['Newsreader'] font-bold text-white">froggy書局</div>
+</div>
+<div class="flex-grow max-w-2xl px-12 hidden md:block">
+<div class="flex items-center bg-white/10 px-6 py-3 rounded-full border border-white/10">
+<span class="material-symbols-outlined text-white/50 text-xl">search</span>
+<div class="flex-grow px-4 text-white/40 text-sm">搜尋書名、作者、ISBN...</div>
+<span class="material-symbols-outlined text-white/70 text-lg">search</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3 py-2 px-3 bg-white/10 rounded-lg text-white">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-bold tracking-widest">黃金會員</span>
+</div>
+<span class="material-symbols-outlined text-white/70">shopping_bag</span>
+</div>
+</div>
+</nav>
+<!-- Main Content from SCREEN_32 -->
+<main class="max-w-screen-2xl mx-auto px-8 md:px-16 pt-32 pb-24">
+<header class="mb-12">
+<span class="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Member Center</span>
+<h1 class="text-5xl font-serif italic text-primary leading-tight mb-4">會員資料</h1>
+<p class="text-on-surface-variant text-sm tracking-wide">維護您的個人基本資訊、地址與帳戶安全性設置。</p>
+</header>
+<div class="grid grid-cols-12 gap-12">
+<aside class="col-span-3 space-y-1">
+<div class="flex items-center gap-4 px-6 py-4 text-on-surface-variant"><span class="material-symbols-outlined">dashboard</span><span class="text-[11px] uppercase tracking-[0.2em]">總覽</span></div>
+<div class="flex items-center gap-4 px-6 py-4 text-on-surface-variant"><span class="material-symbols-outlined">local_shipping</span><span class="text-[11px] uppercase tracking-[0.2em]">訂單狀態</span></div>
+<div class="flex items-center gap-4 px-6 py-4 text-on-surface-variant"><span class="material-symbols-outlined">library_books</span><span class="text-[11px] uppercase tracking-[0.2em]">收藏書</span></div>
+<div class="flex items-center gap-4 px-6 py-4 bg-primary text-on-primary rounded-xl font-bold shadow-lg"><span class="material-symbols-outlined">manage_accounts</span><span class="text-[11px] uppercase tracking-[0.2em]">會員資料</span></div>
+</aside>
+<div class="col-span-9">
+<div class="bg-surface-container-lowest p-10 rounded-2xl border border-outline-variant/30 shadow-sm">
+<div class="grid grid-cols-2 gap-8 mb-8">
+<div class="h-12 bg-surface-container-low rounded-lg"></div>
+<div class="h-12 bg-surface-container-low rounded-lg"></div>
+</div>
+<div class="grid grid-cols-2 gap-8 mb-8">
+<div class="h-12 bg-surface-container-low rounded-lg"></div>
+<div class="h-12 bg-surface-container-low rounded-lg"></div>
+</div>
+<div class="h-24 bg-surface-container-low rounded-lg"></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Dark semi-transparent overlay -->
+<div class="fixed inset-0 z-[55] bg-primary/60 backdrop-blur-[2px]"></div>
+<!-- Update Security Question Modal Overlay -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-4">
+<!-- Modal Container -->
+<div class="bg-[#fbf9f5] w-full max-w-lg shadow-[0_24px_80px_rgba(0,32,70,0.5)] relative overflow-hidden flex flex-col rounded-lg">
+<!-- Modal Header - Deep Blue -->
+<div class="bg-primary p-8 text-on-primary flex justify-between items-center relative z-10">
+<div>
+<h2 class="text-2xl font-serif">修改帳號安全性問題</h2>
+<p class="text-[10px] opacity-70 font-sans tracking-widest uppercase mt-1">UPDATE SECURITY QUESTION</p>
+</div>
+<button class="hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<!-- Modal Content -->
+<div class="p-10 space-y-8 relative z-10">
+<!-- New Security Question -->
+<div class="space-y-4">
+<div class="group">
+<label class="block text-[10px] font-sans font-bold tracking-[0.15em] text-on-surface-variant mb-2 uppercase" for="question">
+                            新的安全性問題 (NEW SECURITY QUESTION)
+                        </label>
+<div class="relative">
+<select class="w-full bg-surface-container-low border-none focus:ring-0 focus:bg-surface-container-highest transition-all py-4 px-5 font-sans text-sm tracking-wide text-primary rounded appearance-none" id="question">
+<option disabled="" selected="" value="">請選擇一個問題 (Please select a question)</option>
+<option>您第一本珍藏書的書名？</option>
+<option>您童年居住的街道名稱？</option>
+<option>您最喜愛的作家是誰？</option>
+<option>您第一隻寵物的名字？</option>
+<option>自定義問題... (Custom question...)</option>
+</select>
+<div class="absolute bottom-0 left-0 w-0 h-[2px] bg-secondary transition-all duration-500 group-focus-within:w-full"></div>
+</div>
+</div>
+</div>
+<!-- New Answer -->
+<div class="space-y-4">
+<div class="group">
+<label class="block text-[10px] font-sans font-bold tracking-[0.15em] text-on-surface-variant mb-2 uppercase" for="new-answer">
+                            新的答案 (NEW ANSWER)
+                        </label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border-none focus:ring-0 focus:bg-surface-container-highest transition-all py-4 px-5 font-sans text-lg tracking-widest placeholder:text-on-surface-variant/30 rounded" id="new-answer" placeholder="您的答案 (Your Answer)" type="text"/>
+<div class="absolute bottom-0 left-0 w-0 h-[2px] bg-secondary transition-all duration-500 group-focus-within:w-full"></div>
+</div>
+<p class="mt-2 text-[11px] text-on-surface-variant italic font-sans">
+                            請牢記此答案，這將用於未來的身份驗證。 (Please remember this answer for future verification.)
+                        </p>
+</div>
+</div>
+<div class="pt-4 space-y-4">
+<button class="w-full h-14 bg-primary text-on-primary font-sans font-bold tracking-[0.2em] text-xs hover:bg-[#001530] transition-all active:scale-[0.98] shadow-lg rounded" onclick="const modalContent = this.closest('.p-10'); modalContent.innerHTML = `&lt;div class='py-12 flex flex-col items-center text-center space-y-6 animate-in fade-in zoom-in duration-500'&gt;&lt;div class='w-20 h-20 bg-green-50 rounded-full flex items-center justify-center text-green-600 mb-2'&gt;&lt;span class='material-symbols-outlined text-5xl'&gt;check_circle&lt;/span&gt;&lt;/div&gt;&lt;div class='space-y-2'&gt;&lt;h3 class='text-2xl font-serif text-primary'&gt;修改成功&lt;/h3&gt;&lt;p class='text-sm text-on-surface-variant font-sans'&gt;(Update Successful)&lt;/p&gt;&lt;/div&gt;&lt;p class='text-xs text-on-surface-variant tracking-wider uppercase opacity-70'&gt;安全設置已更新。&lt;br&gt;Security settings have been updated.&lt;/p&gt;&lt;div class='w-full bg-surface-container-low h-1 rounded-full overflow-hidden'&gt;&lt;div class='bg-primary h-full w-1/2 animate-[progress_2s_ease-in-out_infinite]'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;style&gt;@keyframes progress { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }&lt;/style&gt;`; setTimeout(() =&gt; { window.location.reload(); }, 2500);">
+                        儲存修改 (SAVE CHANGES)
+                    </button>
+<button class="w-full h-14 bg-transparent border border-outline-variant text-on-surface-variant font-sans font-bold tracking-[0.2em] text-[10px] hover:bg-error hover:text-white hover:border-error transition-all rounded">
+                        取消 (CANCEL)
+                    </button>
+</div>
+</div>
+<!-- Aesthetic Accent Line -->
+<div class="h-1 bg-gradient-to-r from-primary/20 via-secondary/40 to-primary/20 relative z-10"></div>
+</div>
+</div>
+<!-- Decorative background elements -->
+<div class="fixed -bottom-24 -left-24 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+<div class="fixed -top-24 -right-24 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+</body></html>

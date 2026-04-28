@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>froggy書局 - 會員資料主畫面</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif+TC:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#002046",
+                        "secondary": "#96490b",
+                        "background": "#fbf9f5",
+                        "surface": "#fbf9f5",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1c1a",
+                        "on-surface": "#1b1c1a",
+                        "on-surface-variant": "#44474e",
+                        "outline": "#74777f",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-container": "#efeeea",
+                        "surface-container-high": "#eae8e4",
+                        "surface-container-highest": "#e4e2de",
+                        "error": "#ba1a1a",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "Noto Serif TC", "serif"],
+                        "display": ["Newsreader", "Noto Serif TC", "serif"],
+                        "body": ["Manrope", "system-ui", "sans-serif"],
+                        "label": ["Manrope", "system-ui", "sans-serif"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f5;
+            font-family: 'Manrope', 'system-ui', sans-serif;
+            color: #1b1c1a;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        h1, h2, h3, .serif-heading {
+            font-family: 'Newsreader', 'Noto Serif TC', serif;
+        }
+        .user-menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            z-index: 100;
+        }
+        .user-menu-container:hover .user-menu-dropdown {
+            display: block;
+        }
+        /* Fixed modal transition and removed blurriness */
+        #modal-overlay {
+            transition: opacity 0.2s ease-in-out;
+        }
+        #modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+            display: none !important;
+        }
+        #modal-overlay:not(.hidden) {
+            opacity: 1;
+            display: flex !important;
+        }
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2344474e'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.25rem center;
+            background-size: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#002046] border-b border-primary/20">
+<div class="flex justify-between items-center px-8 md:px-16 py-5 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-['Newsreader'] font-bold text-white" href="../froggy_main/mainscreen.html">froggy書局</a>
+</div>
+<div class="flex-grow max-w-2xl px-12 hidden md:block">
+<div class="flex items-center bg-white/10 px-6 py-3 rounded-full group focus-within:bg-white/20 transition-all border border-white/10 focus-within:border-white/30 shadow-sm">
+<span class="material-symbols-outlined text-white/50 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-body w-full px-4 text-white placeholder:text-white/40" placeholder="搜尋書名、作者、ISBN..." type="text"/>
+<button class="text-white/70 hover:text-white transition-transform hover:scale-110">
+<span class="material-symbols-outlined text-lg">search</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative user-menu-container order-2">
+<a class="flex items-center gap-3 py-2 px-3 hover:bg-white/10 rounded-lg transition-all text-white" href="../../window_jp/froggy_login/login.html">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-bold tracking-widest">黃金會員</span>
+</a>
+<div class="user-menu-dropdown pt-2">
+<div class="w-56 bg-surface-container-lowest border border-outline-variant shadow-2xl rounded-xl overflow-hidden">
+<div class="p-5 border-b border-outline-variant bg-surface-container-low">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+</div>
+<div>
+<p class="text-xs font-bold text-primary">黃金會員</p>
+<p class="text-[10px] text-on-surface-variant">A. Sterling</p>
+</div>
+</div>
+</div>
+<div class="py-2">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span class="tracking-widest">總覽</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">local_shipping</span>
+<span class="tracking-widest">訂單詳情</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">library_books</span>
+<span class="tracking-widest">收藏書</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">manage_accounts</span>
+<span class="tracking-widest">會員資料修改</span>
+</a>
+</div>
+<div class="border-t border-outline-variant py-2 bg-surface-container-low/30">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-error hover:bg-error/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="tracking-widest font-bold">登出</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<a class="text-white/70 hover:text-white transition-colors order-1" href="../froggy_cart/cart.html">
+<span class="material-symbols-outlined">shopping_bag</span>
+</a>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-8 md:px-16 pt-32 pb-24">
+<!-- Header Section -->
+<header class="mb-12">
+<div class="flex items-end gap-3 mb-2">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Member Center</span>
+</div>
+<h1 class="text-5xl font-headline italic text-primary leading-tight mb-4">會員資料</h1>
+<p class="text-on-surface-variant font-body max-w-2xl text-sm tracking-wide">您的個人基本資訊、地址與帳戶安全性設置。</p>
+</header>
+<!-- Content Layout -->
+<div class="grid grid-cols-12 gap-12">
+<!-- Side Navigation -->
+<aside class="col-span-12 md:col-span-3">
+<div class="space-y-1">
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_user_all/user_all.html">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">總覽</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_order/order.html">
+<span class="material-symbols-outlined group-hover:text-primary">receipt_long</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">訂單詳情</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_booksaving/booksaving.html">
+<span class="material-symbols-outlined group-hover:text-primary">favorite</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">收藏書</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 bg-primary text-on-primary rounded-xl font-bold transition-all shadow-lg" href="../froggy_user_info/user_info.html">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">會員資料修改</span>
+</a>
+<div class="h-8"></div>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-error/10 hover:text-error transition-all rounded-xl group" href="#" data-auth-logout>
+<span class="material-symbols-outlined">logout</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">登出</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="col-span-12 md:col-span-9">
+<section class="flex flex-col gap-8">
+<!-- Form Card -->
+<div class="bg-surface-container-lowest p-10 rounded-2xl border border-outline-variant/30 shadow-sm">
+<div class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">帳號 (Email)</label>
+<div id="info-email" class="px-1 py-2 font-body text-sm text-on-surface/60">...</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">暱稱</label>
+<div id="info-nickname" class="px-1 py-2 font-body text-sm text-on-surface">...</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">性別</label>
+<div id="info-gender" class="px-1 py-2 font-body text-sm text-on-surface">...</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">出生日期</label>
+<div id="info-birthday" class="px-1 py-2 font-body text-sm text-on-surface">...</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">電話</label>
+<div id="info-phone" class="px-1 py-2 font-body text-sm text-on-surface">...</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">安全性提示問題</label>
+<div class="space-y-1">
+<div id="info-question" class="px-1 py-2 font-body text-sm text-on-surface">...</div>
+<div class="px-1 py-2 font-body text-sm text-on-surface tracking-widest">********</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">地址</label>
+<div id="info-address" class="px-1 py-2 font-body text-sm text-on-surface leading-relaxed">...</div>
+</div>
+<div class="pt-8 border-t border-outline-variant/10 flex flex-col lg:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4 text-on-surface-variant mr-auto">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+<span class="text-[11px] font-body uppercase tracking-widest">您的個人資料受到高強度加密保護。</span>
+</div>
+<div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+<button class="flex-1 lg:flex-none px-6 py-4 bg-surface-container-high text-primary font-label text-[10px] font-bold uppercase tracking-widest hover:bg-surface-container-highest transition-all rounded" onclick="openVerification('password')" type="button">
+                                        變更密碼
+                                    </button>
+<button class="flex-1 lg:flex-none px-6 py-4 bg-surface-container-high text-primary font-label text-[10px] font-bold uppercase tracking-widest hover:bg-surface-container-highest transition-all rounded" onclick="openVerification('security')" type="button">
+                                        修改安全性問題
+                                    </button>
+<button class="w-full lg:w-auto px-12 py-4 bg-primary text-white font-label text-xs font-bold uppercase tracking-[0.2em] hover:opacity-90 active:scale-95 transition-all shadow-lg rounded" onclick="openVerification('profile')" type="button">
+                                        更新資料
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#002046]">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center px-12 py-16 w-full max-w-screen-2xl mx-auto">
+<div class="space-y-4 mb-8 md:mb-0">
+<a class="text-xl font-bold text-white font-headline" href="#">froggy書局</a>
+<p class="text-white/70 font-body text-sm">© 2024 froggy書局. 始於筆墨，承載智慧。</p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4">
+</div>
+<div class="mt-8 md:mt-0 flex gap-6">
+</div></div>
+</footer>
+<!-- Unified Modal Overlay - Updated for HD clarity and dark semi-transparent background -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-4 hidden" id="modal-overlay">
+<div class="fixed inset-0 bg-[#000a14]/80" onclick="closeAllModals()"></div>
+<div class="w-full relative z-10 antialiased" id="modal-container">
+<!-- Content will be injected here -->
+</div>
+</div>
+<script>
+        let currentFlow = null;
+        let cachedMember = null;
+
+        const questionMap = {
+            'q1': '您第一所就讀的小學名稱？',
+            'q2': '您最喜歡的一本書？',
+            'q3': '您兒時的寵物名字？'
+        };
+
+        function openVerification(flow) {
+            if (!cachedMember) {
+                alert('會員資料尚未載入完成，請稍後再試。');
+                return;
+            }
+            currentFlow = flow;
+            renderVerificationModal();
+            document.getElementById('modal-overlay').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAllModals() {
+            document.getElementById('modal-overlay').classList.add('hidden');
+            document.getElementById('modal-container').innerHTML = '';
+            document.body.style.overflow = '';
+            currentFlow = null;
+        }
+
+        function handleVerify() {
+            const answerInput = document.getElementById('verification-answer');
+            const userAnswer = answerInput.value.trim();
+            
+            if (userAnswer === cachedMember.securityAnswer) {
+                if (currentFlow === 'password') {
+                    renderPasswordModal();
+                } else if (currentFlow === 'security') {
+                    renderSecurityModal();
+                } else if (currentFlow === 'profile') {
+                    renderProfileModal();
+                }
+            } else {
+                alert('安全性問題答案錯誤，驗證失敗。');
+                answerInput.value = '';
+                answerInput.focus();
+            }
+        }
+
+        function renderVerificationModal() {
+            const container = document.getElementById('modal-container');
+            const questionText = questionMap[cachedMember.securityQuestion] || cachedMember.securityQuestion;
+            
+            container.className = "w-full max-w-[480px] mx-auto antialiased";
+            container.innerHTML = `
+                <div class="bg-[#f5f3ef] shadow-[0_32px_64px_rgba(0,0,0,0.2)] overflow-hidden flex flex-col rounded-lg relative">
+                    <div class="bg-primary p-8 text-on-primary flex justify-between items-start relative">
+                        <div class="flex flex-col gap-1">
+                            <h2 class="text-2xl font-headline tracking-wide">身分驗證</h2>
+                            <p class="text-[10px] opacity-70 font-body tracking-[0.2em] font-medium uppercase">IDENTITY VERIFICATION</p>
+                        </div>
+                        <button class="text-white/60 hover:text-white transition-colors" onclick="closeAllModals()">
+                            <span class="material-symbols-outlined text-2xl">close</span>
+                        </button>
+                    </div>
+                    <div class="p-10 pb-12 bg-surface">
+                        <div class="mb-10">
+                            <div class="flex items-center gap-2 text-on-surface-variant/60 mb-4">
+                                <span class="material-symbols-outlined text-lg">help</span>
+                                <p class="text-[10px] font-body font-bold tracking-widest uppercase">安全性問題 (SECURITY QUESTION)</p>
+                            </div>
+                            <div class="space-y-2">
+                                <p class="text-xl font-headline text-primary font-bold">${questionText}</p>
+                            </div>
+                        </div>
+                        <div class="space-y-10">
+                            <div>
+                                <label class="block text-[10px] font-body font-bold tracking-widest text-on-surface-variant mb-3 uppercase">您的答案 (YOUR ANSWER)</label>
+                                <input id="verification-answer" class="w-full bg-[#efeeea] border-none focus:ring-0 focus:bg-[#e4e2de] transition-colors py-4 px-5 font-body text-lg text-primary placeholder:text-on-surface-variant/20 rounded" placeholder="請輸入答案" type="text"/>
+                            </div>
+                            <div class="flex gap-4">
+                                <button class="flex-1 bg-[#e4e2de] text-on-surface font-body font-bold py-4 tracking-widest text-[11px] hover:bg-error hover:text-white transition-all active:scale-[0.98] uppercase rounded" onclick="closeAllModals()">
+                                    取消 (CANCEL)
+                                </button>
+                                <button class="flex-1 bg-primary text-on-primary font-body font-bold py-4 tracking-widest text-[11px] hover:bg-primary/95 transition-all active:scale-[0.98] shadow-md uppercase rounded" onclick="handleVerify()">
+                                    驗證 (VERIFY)
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-10 text-center">
+                            <a href="../../window_jp/froggy_verification/verification_forget.html" class="text-[11px] font-body text-on-surface-variant/70 hover:text-secondary transition-all decoration-1 underline underline-offset-4">
+                                忘記安全性問題答案？ (Forgot security answer?)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Allow Enter key to submit
+            document.getElementById('verification-answer').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') handleVerify();
+            });
+        }
+
+        function renderPasswordModal() {
+            const container = document.getElementById('modal-container');
+            container.className = "w-full max-w-md mx-auto antialiased";
+            container.innerHTML = `
+                <div class="bg-[#fbf9f5] w-full max-w-md shadow-[0_24px_80px_rgba(0,32,70,0.5)] relative overflow-hidden flex flex-col rounded-lg z-10">
+                    <div class="bg-primary p-8 text-on-primary flex justify-between items-center relative z-10">
+                        <div>
+                            <h2 class="text-2xl font-headline">修改密碼</h2>
+                            <p class="text-[10px] opacity-70 font-body tracking-widest uppercase mt-1">CHANGE PASSWORD</p>
+                        </div>
+                        <button class="hover:opacity-70 transition-opacity" onclick="closeAllModals()">
+                            <span class="material-symbols-outlined text-2xl">close</span>
+                        </button>
+                    </div>
+                    <form class="p-10 space-y-8 bg-surface relative z-10" onsubmit="handleChangePassword(event)">
+                        <div class="space-y-6">
+                            <div class="space-y-2 group">
+                                <label class="flex items-center gap-2 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest" for="current_password">
+                                    <span>目前密碼</span>
+                                    <span class="opacity-40 text-[9px]">CURRENT PASSWORD</span>
+                                </label>
+                                <div class="relative">
+                                    <input required class="w-full bg-surface-container-low border-none focus:ring-0 focus:bg-surface-container-highest py-4 px-5 font-body text-lg tracking-widest placeholder:text-on-surface-variant/30 rounded transition-all" id="current_password" placeholder="••••••••" type="password"/>
+                                    <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/40 text-lg">lock</span>
+                                    <div class="absolute bottom-0 left-0 w-0 h-[2px] bg-secondary transition-all duration-500 group-focus-within:w-full"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-2 group">
+                                <label class="flex items-center gap-2 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest" for="new_password">
+                                    <span>新密碼</span>
+                                    <span class="opacity-40 text-[9px]">NEW PASSWORD</span>
+                                </label>
+                                <div class="relative">
+                                    <input required class="w-full bg-surface-container-low border-none focus:ring-0 focus:bg-surface-container-highest py-4 px-5 font-body text-lg tracking-widest placeholder:text-on-surface-variant/30 rounded transition-all" id="new_password" placeholder="••••••••" type="password"/>
+                                    <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/40 text-lg">key</span>
+                                    <div class="absolute bottom-0 left-0 w-0 h-[2px] bg-secondary transition-all duration-500 group-focus-within:w-full"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-2 group">
+                                <label class="flex items-center gap-2 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest" for="confirm_password">
+                                    <span>確認新密碼</span>
+                                    <span class="opacity-40 text-[9px]">CONFIRM NEW PASSWORD</span>
+                                </label>
+                                <div class="relative">
+                                    <input required class="w-full bg-surface-container-low border-none focus:ring-0 focus:bg-surface-container-highest py-4 px-5 font-body text-lg tracking-widest placeholder:text-on-surface-variant/30 rounded transition-all" id="confirm_password" placeholder="••••••••" type="password"/>
+                                    <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/40 text-lg">check</span>
+                                    <div class="absolute bottom-0 left-0 w-0 h-[2px] bg-secondary transition-all duration-500 group-focus-within:w-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-2 flex flex-col gap-4">
+                            <div class="flex gap-4">
+                                <button class="flex-1 bg-surface-container-highest text-on-surface font-body font-bold py-5 tracking-[0.2em] text-xs hover:bg-error hover:text-white transition-all active:scale-[0.98] shadow-md rounded flex items-center justify-center gap-2" onclick="closeAllModals()" type="button">
+                                    <span>取消</span>
+                                    <span class="text-[9px] opacity-60">CANCEL</span>
+                                </button>
+                                <button class="flex-1 bg-primary text-on-primary font-body font-bold py-5 tracking-[0.2em] text-xs hover:bg-[#001530] transition-all active:scale-[0.98] shadow-lg rounded flex items-center justify-center gap-2" type="submit">
+                                    <span>更新密碼</span>
+                                    <span class="text-[9px] opacity-60">UPDATE</span>
+                                </button>
+                            </div>
+                            <p class="text-center mt-4">
+                                <a href="../../window_jp/froggy_passwordForget/password_forget.html" class="text-on-surface-variant font-headline italic text-sm hover:text-secondary transition-colors underline decoration-secondary/30 underline-offset-8">忘記密碼？ (Forgot password?)</a>
+                            </p>
+                        </div>
+                    </form>
+                    <div class="h-1 bg-gradient-to-r from-primary/20 via-secondary/40 to-primary/20 relative z-10"></div>
+                </div>
+            `;
+        }
+
+        async function handleChangePassword(event) {
+            event.preventDefault();
+            const currentPwd = document.getElementById('current_password').value;
+            const newPwd = document.getElementById('new_password').value;
+            const confirmPwd = document.getElementById('confirm_password').value;
+
+            // 1. 校對目前密碼
+            if (currentPwd !== cachedMember.password) {
+                alert('目前密碼輸入錯誤，請重新確認。');
+                return;
+            }
+
+            // 2. 驗證新密碼格式 (20碼以內，包含大小寫英文與數字)
+            const pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{1,20}$/;
+            if (!pwdRegex.test(newPwd)) {
+                alert('新密碼格式不符：需在 20 碼以內，且包含大小寫英文字母與數字。');
+                return;
+            }
+
+            // 3. 確認新密碼一致
+            if (newPwd !== confirmPwd) {
+                alert('新密碼與確認密碼不一致。');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/update-member', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: cachedMember.email,
+                        password: newPwd
+                    })
+                });
+
+                const result = await response.json();
+                if (result.ok) {
+                    alert('密碼已成功更新！');
+                    cachedMember.password = newPwd; // 更新快取
+                    closeAllModals();
+                } else {
+                    alert('更新失敗：' + result.message);
+                }
+            } catch (error) {
+                console.error('Update password error:', error);
+                alert('伺服器連線失敗，請稍後再試。');
+            }
+        }
+
+        function renderSecurityModal() {
+            const container = document.getElementById('modal-container');
+            container.className = "w-full max-w-lg mx-auto antialiased";
+            container.innerHTML = `
+                <div class="bg-[#fbf9f5] w-full max-w-lg shadow-[0_24px_80px_rgba(0,32,70,0.5)] relative overflow-hidden flex flex-col rounded-lg z-10">
+                    <div class="bg-primary p-8 text-on-primary flex justify-between items-center relative z-10">
+                        <div>
+                            <h2 class="text-2xl font-headline">修改帳號安全性問題</h2>
+                            <p class="text-[10px] opacity-70 font-body tracking-widest uppercase mt-1">UPDATE SECURITY QUESTION</p>
+                        </div>
+                        <button class="hover:opacity-70 transition-opacity" onclick="closeAllModals()">
+                            <span class="material-symbols-outlined text-2xl">close</span>
+                        </button>
+                    </div>
+                    <div class="p-10 space-y-8 relative z-10 bg-surface">
+                        <div class="space-y-4">
+                            <div class="group">
+                                <label class="block text-[10px] font-body font-bold tracking-[0.15em] text-on-surface-variant mb-2 uppercase" for="new-question">
+                                    新的安全性問題 (NEW SECURITY QUESTION)
+                                </label>
+                                <div class="relative">
+                                    <select class="w-full bg-surface-container-low border-none focus:ring-0 focus:bg-surface-container-highest transition-all py-4 px-5 font-body text-sm tracking-wide text-primary rounded appearance-none" id="new-question">
+                                        <option value="q1" ${cachedMember.securityQuestion === 'q1' ? 'selected' : ''}>您第一所就讀的小學名稱？</option>
+                                        <option value="q2" ${cachedMember.securityQuestion === 'q2' ? 'selected' : ''}>您最喜歡的一本書？</option>
+                                        <option value="q3" ${cachedMember.securityQuestion === 'q3' ? 'selected' : ''}>您兒時的寵物名字？</option>
+                                    </select>
+                                    <div class="absolute bottom-0 left-0 w-0 h-[2px] bg-secondary transition-all duration-500 group-focus-within:w-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="group">
+                                <label class="block text-[10px] font-body font-bold tracking-[0.15em] text-on-surface-variant mb-2 uppercase" for="new-answer">
+                                    新的答案 (NEW ANSWER)
+                                </label>
+                                <div class="relative">
+                                    <input class="w-full bg-surface-container-low border-none focus:ring-0 focus:bg-surface-container-highest transition-all py-4 px-5 font-body text-lg tracking-widest placeholder:text-on-surface-variant/30 rounded" id="new-answer" placeholder="您的答案 (Your Answer)" type="text"/>
+                                    <div class="absolute bottom-0 left-0 w-0 h-[2px] bg-secondary transition-all duration-500 group-focus-within:w-full"></div>
+                                </div>
+                                <p class="mt-2 text-[11px] text-on-surface-variant italic font-body">
+                                    請牢記此答案，這將用於未來的身份驗證。 (Please remember this answer for future verification.)
+                                </p>
+                            </div>
+                        </div>
+                        <div class="pt-4 space-y-4">
+                            <button class="w-full h-14 bg-primary text-on-primary font-body font-bold tracking-[0.2em] text-xs hover:bg-[#001530] transition-all active:scale-[0.98] shadow-lg rounded" onclick="handleUpdateSecurity()">
+                                儲存修改 (SAVE CHANGES)
+                            </button>
+                            <button class="w-full h-14 bg-transparent border border-outline-variant text-on-surface-variant font-body font-bold tracking-[0.2em] text-[10px] hover:bg-error hover:text-white hover:border-error transition-all rounded" onclick="closeAllModals()">
+                                取消 (CANCEL)
+                            </button>
+                        </div>
+                    </div>
+                    <div class="h-1 bg-gradient-to-r from-primary/20 via-secondary/40 to-primary/20 relative z-10"></div>
+                </div>
+            `;
+        }
+
+        async function handleUpdateSecurity() {
+            const questionSelect = document.getElementById('new-question');
+            const answerInput = document.getElementById('new-answer');
+            const newQuestion = questionSelect.value;
+            const newAnswer = answerInput.value.trim();
+
+            if (!newQuestion) {
+                alert('請選擇一個安全性問題。');
+                return;
+            }
+
+            if (!newAnswer) {
+                alert('請輸入安全性問題的答案。');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/update-member', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: cachedMember.email,
+                        securityQuestion: newQuestion,
+                        securityAnswer: newAnswer
+                    })
+                });
+
+                const result = await response.json();
+                if (result.ok) {
+                    alert('安全性問題已更新！');
+                    cachedMember.securityQuestion = newQuestion;
+                    cachedMember.securityAnswer = newAnswer;
+                    
+                    // 更新頁面上的問題顯示
+                    const questionDisplay = document.getElementById('info-question');
+                    if (questionDisplay) {
+                        questionDisplay.textContent = questionMap[newQuestion] || newQuestion;
+                    }
+                    
+                    closeAllModals();
+                } else {
+                    alert('更新失敗：' + result.message);
+                }
+            } catch (error) {
+                console.error('Update security question error:', error);
+                alert('伺服器連線失敗，請稍後再試。');
+            }
+        }
+
+        function renderProfileModal() {
+            const container = document.getElementById('modal-container');
+            container.className = "w-full max-w-xl mx-auto antialiased";
+            container.innerHTML = `
+                <div class="relative bg-surface w-full max-w-xl rounded-xl shadow-[0_24px_64px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col z-10">
+                    <!-- Modal Header -->
+                    <div class="bg-primary px-10 py-8 flex justify-between items-start">
+                        <div class="flex flex-col gap-1">
+                            <h2 class="text-white text-2xl font-headline italic tracking-wide">修改會員資料 (UPDATE MEMBER INFO)</h2>
+                        </div>
+                        <button class="text-white/60 hover:text-white transition-colors material-symbols-outlined mt-1" onclick="closeAllModals()">close</button>
+                    </div>
+                    <!-- Modal Content: Update Form -->
+                    <div class="p-10 space-y-8 bg-surface">
+                        <form class="space-y-6" onsubmit="handleUpdateProfile(event)">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70" for="nickname-edit">暱稱 / NICKNAME</label>
+                                <input required class="w-full bg-surface-container-low border-none focus:ring-1 focus:ring-primary rounded-lg font-body text-sm px-5 py-4 transition-all" id="nickname-edit" type="text" value="${cachedMember.nickname}"/>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">性別 / GENDER</label>
+                                <div class="flex flex-wrap gap-8">
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input class="w-4 h-4 text-primary border-outline-variant focus:ring-primary/20" name="gender-edit" type="radio" value="male" ${cachedMember.gender === 'male' ? 'checked' : ''}/>
+                                        <span class="font-body text-sm text-on-surface">男 / Male</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input class="w-4 h-4 text-primary border-outline-variant focus:ring-primary/20" name="gender-edit" type="radio" value="female" ${cachedMember.gender === 'female' ? 'checked' : ''}/>
+                                        <span class="font-body text-sm text-on-surface">女 / Female</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input class="w-4 h-4 text-primary border-outline-variant focus:ring-primary/20" name="gender-edit" type="radio" value="undisclosed" ${cachedMember.gender === 'undisclosed' ? 'checked' : ''}/>
+                                        <span class="font-body text-sm text-on-surface">不透露 / Secret</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">生日 / BIRTHDAY</label>
+                                    <input required id="birthday-edit" class="w-full bg-surface-container-low border-none focus:ring-1 focus:ring-primary rounded-lg font-body text-sm px-5 py-4 transition-all" type="date" value="${cachedMember.birthday}"/>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">電話 / PHONE</label>
+                                    <input required id="phone-edit" class="w-full bg-surface-container-low border-none focus:ring-1 focus:ring-primary rounded-lg font-body text-sm px-5 py-4 transition-all" type="tel" value="${cachedMember.phone}"/>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">住址 / ADDRESS</label>
+                                <textarea required id="address-edit" class="w-full bg-surface-container-low border-none focus:ring-1 focus:ring-primary rounded-lg font-body text-sm px-5 py-4 transition-all min-h-[100px] resize-none">${cachedMember.address}</textarea>
+                            </div>
+                            <div class="pt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-outline-variant/10">
+                                <button class="flex-1 px-8 py-4 bg-surface-container-high text-on-surface-variant hover:bg-error hover:text-white transition-all rounded font-label text-xs font-bold uppercase tracking-[0.2em]" onclick="closeAllModals()" type="button">
+                                    取消 / CANCEL
+                                </button>
+                                <button class="flex-1 px-8 py-4 bg-primary text-white hover:bg-[#00152e] rounded font-label text-xs font-bold uppercase tracking-[0.2em] active:scale-95 transition-all shadow-lg shadow-primary/20" type="submit">
+                                    儲存修改 / SAVE CHANGES
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Aesthetic Accent Line -->
+                    <div class="h-1 bg-gradient-to-r from-primary/20 via-secondary/40 to-primary/20 relative z-10"></div>
+                </div>
+            `;
+        }
+
+        async function handleUpdateProfile(event) {
+            event.preventDefault();
+            
+            const nickname = document.getElementById('nickname-edit').value.trim();
+            const gender = document.querySelector('input[name="gender-edit"]:checked').value;
+            const birthday = document.getElementById('birthday-edit').value;
+            const phone = document.getElementById('phone-edit').value.trim();
+            const address = document.getElementById('address-edit').value.trim();
+
+            // 驗證規則 (參照 froggy_register.html)
+            if (nickname.length === 0 || nickname.length > 20) {
+                alert('暱稱不可空白，且不可超過 20 字。');
+                return;
+            }
+
+            if (!/^09\d{8}$/.test(phone)) {
+                alert('連絡電話格式不正確，需為 09 開頭的 10 碼手機號碼。');
+                return;
+            }
+
+            const taiwanCities = ["台北市", "臺北市", "新北市", "桃園市", "台中市", "臺中市", "台南市", "臺南市", "高雄市", "基隆市", "新竹市", "新竹縣", "苗栗縣", "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "屏東縣", "宜蘭縣", "花蓮縣", "台東縣", "臺東縣", "澎湖縣", "金門縣", "連江縣"];
+            const hasCity = taiwanCities.some(city => address.includes(city));
+            const hasDistrict = /[^\s]+(區|鄉|鎮|市)/.test(address);
+            const hasStreet = /(路|街|大道|巷|弄)/.test(address);
+            const hasNumber = /\d+號/.test(address);
+            
+            if (!hasCity || !hasDistrict || !hasStreet || !hasNumber) {
+                alert('地址格式不正確，需包含縣市、區鄉鎮市、路街巷弄與門牌號（例：號）。');
+                return;
+            }
+
+            if (!birthday) {
+                alert('請選擇生日。');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/update-member', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: cachedMember.email,
+                        nickname,
+                        gender,
+                        birthday,
+                        phone,
+                        address
+                    })
+                });
+
+                const result = await response.json();
+                if (result.ok) {
+                    alert('個人資料已更新！');
+                    // 更新快取
+                    cachedMember.nickname = nickname;
+                    cachedMember.gender = gender;
+                    cachedMember.birthday = birthday;
+                    cachedMember.phone = phone;
+                    cachedMember.address = address;
+                    
+                    // 重新整理頁面顯示
+                    loadMemberInfo();
+                    closeAllModals();
+                } else {
+                    alert('更新失敗：' + result.message);
+                }
+            } catch (error) {
+                console.error('Update profile error:', error);
+                alert('伺服器連線失敗，請稍後再試。');
+            }
+        }
+
+        async function loadMemberInfo() {
+            const currentMember = FroggyAuth.getCurrentMember();
+            if (!currentMember?.email) return;
+
+            try {
+                const response = await fetch('/python/member.json', { cache: 'no-store' });
+                if (!response.ok) return;
+                const members = await response.json();
+                const member = members.find(m => m.email.toLowerCase() === currentMember.email.toLowerCase());
+                
+                if (member) {
+                    cachedMember = member;
+                    document.getElementById('info-email').textContent = member.email;
+                    document.getElementById('info-nickname').textContent = member.nickname;
+                    document.getElementById('info-gender').textContent = 
+                        member.gender === 'male' ? '男性' : 
+                        member.gender === 'female' ? '女性' : '未透露';
+                    document.getElementById('info-birthday').textContent = member.birthday;
+                    document.getElementById('info-phone').textContent = member.phone;
+                    document.getElementById('info-question').textContent = questionMap[member.securityQuestion] || member.securityQuestion;
+                    document.getElementById('info-address').textContent = member.address;
+                }
+            } catch (error) {
+                console.error('Failed to load member info:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMemberInfo);
+    </script>
+    <script src="../../bookstore_JS/auth.js"></script>
+</body></html>

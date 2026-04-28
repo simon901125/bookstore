@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>froggy書局 | 會員中心</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif+TC:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#002046",
+                        "secondary": "#96490b",
+                        "background": "#fbf9f5",
+                        "surface": "#fbf9f5",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1c1a",
+                        "on-surface": "#1b1c1a",
+                        "on-surface-variant": "#44474e",
+                        "outline": "#74777f",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-container": "#efeeea",
+                        "surface-container-high": "#eae8e4",
+                        "surface-container-highest": "#e4e2de",
+                        "error": "#ba1a1a",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "Noto Serif TC", "serif"],
+                        "display": ["Newsreader", "Noto Serif TC", "serif"],
+                        "body": ["Manrope", "system-ui", "sans-serif"],
+                        "label": ["Manrope", "system-ui", "sans-serif"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f5;
+            font-family: 'Manrope', 'system-ui', sans-serif;
+            color: #1b1c1a;
+        }
+        h1, h2, h3, .serif-heading {
+            font-family: 'Newsreader', 'Noto Serif TC', serif;
+        }
+        .user-menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            z-index: 100;
+        }
+        .user-menu-container:hover .user-menu-dropdown {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Top Navigation Bar (Branding & Global Search) -->
+<nav class="fixed top-0 w-full z-50 bg-[#002046] border-b border-primary/20">
+<div class="flex justify-between items-center px-8 md:px-16 py-5 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-['Newsreader'] font-bold text-white" href="../froggy_main/mainscreen.html">froggy書局</a>
+</div>
+<div class="flex-grow max-w-2xl px-12 hidden md:block">
+<div class="flex items-center bg-white/10 px-6 py-3 rounded-full group focus-within:bg-white/20 transition-all border border-white/10 focus-within:border-white/30 shadow-sm">
+<span class="material-symbols-outlined text-white/50 text-xl">search</span>
+<input id="memberSearchInput" class="bg-transparent border-none focus:ring-0 text-sm font-body w-full px-4 text-white placeholder:text-white/40" placeholder="搜尋書名、作者、ISBN..." type="text"/>
+<button id="memberSearchButton" class="text-white/70 hover:text-white transition-transform hover:scale-110" type="button">
+<span class="material-symbols-outlined text-lg">search</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative user-menu-container order-2">
+<a class="flex items-center gap-3 py-2 px-3 hover:bg-white/10 rounded-lg transition-all text-white" href="../../window_jp/froggy_login/login.html">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-bold tracking-widest">黃金會員</span>
+</a>
+<div class="user-menu-dropdown pt-2">
+<div class="w-56 bg-surface-container-lowest border border-outline-variant shadow-2xl rounded-xl overflow-hidden">
+<div class="p-5 border-b border-outline-variant bg-surface-container-low">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+</div>
+<div>
+<p class="text-xs font-bold text-primary">會員專區</p>
+<p class="text-[10px] text-on-surface-variant" data-member-name>會員</p>
+</div>
+</div>
+</div>
+<div class="py-2">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span class="tracking-widest">總覽</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">local_shipping</span>
+<span class="tracking-widest">訂單查看</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">library_books</span>
+<span class="tracking-widest">收藏書</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="../froggy_user_info/user_info.html">
+<span class="material-symbols-outlined text-lg">edit_note</span>
+<span class="tracking-widest">會員資料修改</span>
+</a>
+</div>
+<div class="border-t border-outline-variant py-2 bg-surface-container-low/30">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-error hover:bg-error/5 transition-colors" href="#" data-auth-logout>
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="tracking-widest font-bold">登出</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<a class="text-white/70 hover:text-white transition-all order-1" href="../froggy_cart/cart.html">
+<span class="material-symbols-outlined">shopping_bag</span>
+</a>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-8 md:px-16 pt-32 pb-24">
+<!-- Header Section -->
+<header class="mb-12">
+<div class="flex items-end gap-3 mb-2">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Member Center</span>
+</div>
+<h1 class="text-5xl font-headline italic text-primary leading-tight mb-4">會員中心</h1>
+<p class="text-on-surface-variant font-body max-w-2xl text-sm tracking-wide">歡迎回到您的專屬空間。在此管理您的購入作品、個人帳戶資訊，並瀏覽您不斷豐富的私人典藏。</p>
+</header>
+<!-- Content Layout -->
+<div class="grid grid-cols-12 gap-12">
+<!-- Side Navigation -->
+<aside class="col-span-12 md:col-span-3">
+<div class="space-y-1">
+<a class="flex items-center gap-4 px-6 py-4 bg-primary text-on-primary rounded-xl font-bold transition-all shadow-lg" href="../froggy_user_all/user_all.html">
+<span class="material-symbols-outlined" data-icon="dashboard">space_dashboard</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">總覽</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_order/order.html">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="receipt_long">receipt_long</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">訂單詳情</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_booksaving/booksaving.html">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="favorite">favorite</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">收藏書</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_user_info/user_info.html">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="edit_note">edit_note</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">會員資料修改</span>
+</a>
+<div class="h-8"></div>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-error/10 hover:text-error transition-all rounded-xl group" href="#" data-auth-logout>
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">登出</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="col-span-12 md:col-span-9 space-y-16">
+<!-- Order Tracking Section -->
+<section>
+<div class="flex justify-between items-end mb-8 px-2">
+<div class="space-y-1">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Recent Purchases</span>
+<h2 class="text-3xl font-headline italic text-primary">近期購入</h2>
+</div>
+<a href="../froggy_order/order.html" class="text-[10px] uppercase tracking-widest text-secondary font-bold cursor-pointer hover:underline">查看歷史紀錄</a>
+</div>
+<div id="recent-order-container">
+    <!-- Dynamic Content -->
+    <div class="bg-surface-container-lowest p-10 rounded-2xl border border-outline-variant/30 shadow-sm text-center">
+        <p class="font-body text-sm text-on-surface-variant">正在載入近期購入紀錄...</p>
+    </div>
+</div>
+</section>
+<!-- My Collection Section -->
+<section>
+<div class="flex justify-between items-end mb-8 px-2">
+<div class="space-y-1">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Personal Gallery</span>
+<h2 class="text-3xl font-headline italic text-primary">收藏書</h2>
+</div>
+<div class="flex items-center gap-3">
+<a class="text-[10px] uppercase tracking-widest text-secondary font-bold hover:underline" href="../froggy_booksaving/booksaving.html">查看完整目錄</a>
+<button id="overviewSavedBooksPrev" class="flex h-9 w-9 items-center justify-center rounded-full border border-outline-variant/70 text-primary transition-colors hover:bg-surface-container-low" type="button" aria-label="上一頁收藏書">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button id="overviewSavedBooksNext" class="flex h-9 w-9 items-center justify-center rounded-full border border-outline-variant/70 text-primary transition-colors hover:bg-surface-container-low" type="button" aria-label="下一頁收藏書">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+<div id="overviewSavedBooksGrid" class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+    <div class="col-span-full py-12 text-center">
+        <p class="font-body text-sm text-on-surface-variant">正在載入收藏書...</p>
+    </div>
+</div>
+</section>
+<!-- Profile Section -->
+<section class="bg-surface-container-low/50 p-12 rounded-2xl border border-outline-variant/20">
+<div class="space-y-1 mb-10">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Information</span>
+<h2 class="text-3xl font-headline italic text-primary">會員資料</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+<div class="space-y-2">
+<p class="text-[10px] uppercase tracking-[0.25em] font-bold text-on-surface-variant/70">帳號 (Email)</p>
+<p class="p-4 bg-surface-container-lowest/50 border border-outline-variant/10 rounded-xl font-body text-sm text-primary" data-member-field="email">-</p>
+</div>
+<div class="space-y-2">
+<p class="text-[10px] uppercase tracking-[0.25em] font-bold text-on-surface-variant/70">暱稱</p>
+<p class="p-4 bg-surface-container-lowest/50 border border-outline-variant/10 rounded-xl font-body text-sm text-primary" data-member-field="nickname">-</p>
+</div>
+<div class="space-y-2">
+<p class="text-[10px] uppercase tracking-[0.25em] font-bold text-on-surface-variant/70">性別</p>
+<p class="p-4 bg-surface-container-lowest/50 border border-outline-variant/10 rounded-xl font-body text-sm text-primary" data-member-field="gender">-</p>
+</div>
+<div class="space-y-2">
+<p class="text-[10px] uppercase tracking-[0.25em] font-bold text-on-surface-variant/70">電話</p>
+<p class="p-4 bg-surface-container-lowest/50 border border-outline-variant/10 rounded-xl font-body text-sm text-primary" data-member-field="phone">-</p>
+</div>
+<div class="md:col-span-2 space-y-2">
+<p class="text-[10px] uppercase tracking-[0.25em] font-bold text-on-surface-variant/70">地址</p>
+<p class="p-4 bg-surface-container-lowest/50 border border-outline-variant/10 rounded-xl font-body text-sm text-primary" data-member-field="address">-</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#002046]">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center px-12 py-16 w-full max-w-screen-2xl mx-auto">
+<div class="space-y-4 mb-8 md:mb-0">
+<a class="text-xl font-bold text-white font-headline" href="#">froggy書局</a>
+<p class="text-white/70 font-body text-sm">© 2024 froggy書局. 始於筆墨，承載智慧。</p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4">
+</div>
+<div class="mt-8 md:mt-0 flex gap-6">
+</div></div>
+</footer>
+<script>
+const MEMBER_JSON_URL = "../../python/member.json";
+const BOOKS_JSON_URL = "../../python/books.json";
+const SAVING_BOOKS_JSON_URL = "../../python/member_savingbooks.json";
+const CURRENT_MEMBER_KEY = "froggyCurrentMember";
+const OVERVIEW_SAVED_BOOKS_PAGE_SIZE = 4;
+let overviewSavedBooks = [];
+let overviewSavedBooksPage = 0;
+
+function getCurrentMember() {
+  try {
+    const member = JSON.parse(localStorage.getItem(CURRENT_MEMBER_KEY) || "null");
+    return member && member.email ? member : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function setText(selector, value) {
+  document.querySelectorAll(selector).forEach((element) => {
+    element.textContent = value || "-";
+  });
+}
+
+function formatGender(gender) {
+  const labels = {
+    male: "男",
+    female: "女",
+    undisclosed: "不公開",
+  };
+  return labels[gender] || gender || "-";
+}
+
+function parseDiscountRate(label) {
+  const match = String(label || "").match(/^(\d+)\u6298$/);
+  if (!match) return null;
+  const discountNumber = Number(match[1]);
+  return discountNumber >= 10 ? discountNumber / 100 : discountNumber / 10;
+}
+
+function getDiscountedPrice(book) {
+  const price = Number(book.price || 0);
+  const discountRate = parseDiscountRate(book.promotionLabel);
+  return discountRate && discountRate < 1 ? Math.round(price * discountRate) : price;
+}
+
+function formatPrice(price) {
+  return `$${Number(price || 0).toLocaleString("zh-TW")}`;
+}
+
+function createOverviewSavedBookCard(book) {
+  const card = document.createElement("a");
+  card.className = "group cursor-pointer block";
+  card.href = `../froggy_bookPage/bookPage.html?isbn=${encodeURIComponent(book.isbn)}`;
+  const finalPrice = getDiscountedPrice(book);
+  const hasDiscount = finalPrice < Number(book.price || 0);
+  const badge = book.promotionLabel
+    ? `<div class="mb-1 inline-block border border-error px-2 py-0.5 rounded text-[10px] text-error font-bold tracking-widest">${book.promotionLabel}</div>`
+    : `<div class="h-5"></div>`;
+  const originalPrice = hasDiscount
+    ? `<span class="ml-2 text-[10px] text-on-surface-variant/50 line-through">${formatPrice(book.price)}</span>`
+    : "";
+
+  card.innerHTML = `
+    <div class="aspect-[3/4] bg-surface-container-high rounded-xl overflow-hidden mb-4 relative shadow-sm hover:shadow-xl transition-all duration-500">
+      <img alt="${book.title || "collection book cover"}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="${book.coverUrl || "../../bookstore_DB/bookPicture/getImage.png"}"/>
+      <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        <span class="material-symbols-outlined text-white text-3xl">menu_book</span>
+      </div>
+    </div>
+    ${badge}
+    <h4 class="text-sm font-bold text-primary truncate tracking-wide">${book.title || "未命名書籍"}</h4>
+    <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 truncate">${book.author || "Unknown author"}</p>
+    <p class="text-xs font-bold text-secondary mt-1">${formatPrice(finalPrice)}${originalPrice}</p>
+  `;
+  return card;
+}
+
+function renderOverviewSavedBooksEmpty(message) {
+  const grid = document.getElementById("overviewSavedBooksGrid");
+  if (!grid) return;
+  grid.className = "min-h-[12rem] flex items-center justify-center rounded-2xl border border-dashed border-outline-variant/60 bg-surface-container-low/40";
+  grid.innerHTML = `<p class="font-body text-sm text-on-surface-variant">${message}</p>`;
+  syncOverviewSavedBooksControls();
+}
+
+function syncOverviewSavedBooksControls() {
+  const prevButton = document.getElementById("overviewSavedBooksPrev");
+  const nextButton = document.getElementById("overviewSavedBooksNext");
+  const totalPages = Math.ceil(overviewSavedBooks.length / OVERVIEW_SAVED_BOOKS_PAGE_SIZE);
+  const disabled = totalPages <= 1;
+
+  [prevButton, nextButton].forEach((button) => {
+    if (!button) return;
+    button.disabled = disabled;
+    button.classList.toggle("opacity-40", disabled);
+    button.classList.toggle("cursor-not-allowed", disabled);
+  });
+}
+
+function renderOverviewSavedBooksPage() {
+  const grid = document.getElementById("overviewSavedBooksGrid");
+  if (!grid) return;
+
+  if (!overviewSavedBooks.length) {
+    renderOverviewSavedBooksEmpty("目前尚未收藏任何書籍。");
+    return;
+  }
+
+  const totalPages = Math.ceil(overviewSavedBooks.length / OVERVIEW_SAVED_BOOKS_PAGE_SIZE);
+  overviewSavedBooksPage = ((overviewSavedBooksPage % totalPages) + totalPages) % totalPages;
+  const start = overviewSavedBooksPage * OVERVIEW_SAVED_BOOKS_PAGE_SIZE;
+  const visibleBooks = overviewSavedBooks.slice(start, start + OVERVIEW_SAVED_BOOKS_PAGE_SIZE);
+
+  grid.className = "grid grid-cols-2 lg:grid-cols-4 gap-8";
+  grid.replaceChildren(...visibleBooks.map(createOverviewSavedBookCard));
+  syncOverviewSavedBooksControls();
+}
+
+function goToOverviewSavedBooksPage(direction) {
+  const totalPages = Math.ceil(overviewSavedBooks.length / OVERVIEW_SAVED_BOOKS_PAGE_SIZE);
+  if (totalPages <= 1) return;
+  overviewSavedBooksPage = (overviewSavedBooksPage + direction + totalPages) % totalPages;
+  renderOverviewSavedBooksPage();
+}
+
+async function loadOverviewSavedBooks() {
+  const currentMember = getCurrentMember();
+  if (!currentMember) return;
+
+  try {
+    const [booksResponse, savingResponse] = await Promise.all([
+      fetch(BOOKS_JSON_URL, { cache: "no-store" }),
+      fetch(SAVING_BOOKS_JSON_URL, { cache: "no-store" }),
+    ]);
+    const books = booksResponse.ok ? await booksResponse.json() : [];
+    const savingRecords = savingResponse.ok ? await savingResponse.json() : [];
+    const record = Array.isArray(savingRecords)
+      ? savingRecords.find((item) => String(item.email || "").toLowerCase() === currentMember.email.toLowerCase())
+      : null;
+    const savedIsbns = Array.isArray(record?.isbns) ? record.isbns : [];
+    overviewSavedBooks = savedIsbns
+      .map((isbn) => books.find((book) => book.isbn === isbn))
+      .filter(Boolean);
+    overviewSavedBooksPage = 0;
+    renderOverviewSavedBooksPage();
+  } catch (error) {
+    console.error("Failed to render overview saved books:", error);
+    renderOverviewSavedBooksEmpty("收藏書載入失敗，請稍後再試。");
+  }
+}
+
+async function loadMemberProfile() {
+  const currentMember = getCurrentMember();
+  if (!currentMember) return;
+
+  try {
+    const response = await fetch(MEMBER_JSON_URL, { cache: "no-store" });
+    const members = response.ok ? await response.json() : [];
+    const member = Array.isArray(members)
+      ? members.find((item) => String(item.email || "").toLowerCase() === currentMember.email.toLowerCase())
+      : null;
+
+    const profile = member || currentMember;
+    const displayName = profile.nickname || profile.email;
+    setText("[data-member-name]", displayName);
+    setText("[data-member-field='email']", profile.email);
+    setText("[data-member-field='nickname']", profile.nickname);
+    setText("[data-member-field='gender']", formatGender(profile.gender));
+    setText("[data-member-field='phone']", profile.phone);
+    setText("[data-member-field='address']", profile.address);
+  } catch (error) {
+    console.error("Failed to load member profile:", error);
+  }
+}
+
+async function loadRecentOrder() {
+  const currentMember = getCurrentMember();
+  const container = document.getElementById('recent-order-container');
+  if (!currentMember || !container) return;
+
+  try {
+    const response = await fetch(`/api/orders?email=${encodeURIComponent(currentMember.email)}`, { cache: 'no-store' });
+    const result = await response.json();
+    
+    if (!result.ok || !result.orders || !result.orders.length) {
+      container.innerHTML = `
+        <div class="bg-surface-container-lowest p-10 rounded-2xl border border-outline-variant/30 shadow-sm text-center">
+            <p class="font-body text-sm text-on-surface-variant">目前尚無購書紀錄。</p>
+            <a href="../froggy_main/mainscreen.html" class="mt-4 inline-block text-xs font-bold text-secondary uppercase tracking-widest hover:underline">去書店逛逛</a>
+        </div>
+      `;
+      return;
+    }
+
+    const order = result.orders[0]; 
+    const firstItem = order.items[0];
+    const statusMap = {
+        'pending_payment': { label: '待付款', color: 'text-secondary', bg: 'bg-secondary/10', step: 1 },
+        'paid': { label: '已付款', color: 'text-secondary', bg: 'bg-secondary/10', step: 2 },
+        'shipped': { label: '已出貨', color: 'text-secondary', bg: 'bg-secondary/10', step: 3 },
+        'completed': { label: '已完成', color: 'text-green-700', bg: 'bg-green-50', step: 4 },
+        'cancelled': { label: '已取消', color: 'text-on-surface-variant/40', bg: 'bg-surface-container-high', step: 0 }
+    };
+    const status = statusMap[order.status] || statusMap['pending_payment'];
+    const isCancelled = order.status === 'cancelled';
+    const stepWidth = (status.step / 4) * 100;
+
+    container.innerHTML = `
+      <div class="bg-surface-container-lowest p-10 rounded-2xl border border-outline-variant/30 shadow-sm flex flex-col md:flex-row gap-10 items-center">
+        <div class="w-40 h-52 bg-surface-container-high rounded overflow-hidden flex-shrink-0 shadow-xl">
+          <img alt="order tracking thumbnail" class="w-full h-full object-cover ${isCancelled ? 'grayscale opacity-50' : ''}" src="${firstItem?.coverUrl || '../../bookstore_DB/bookPicture/getImage.png'}"/>
+        </div>
+        <div class="flex-grow space-y-6 w-full">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 mb-2">訂單編號 #${order.orderId}</p>
+              <h3 class="text-2xl font-headline italic text-primary">${firstItem?.title || '多樣書籍'} ${order.items.length > 1 ? `等 ${order.items.length} 本` : ''}</h3>
+            </div>
+            <div class="${status.bg} ${status.color} px-4 py-1.5 rounded-full text-[10px] uppercase font-bold tracking-widest border border-current/20">${status.label}</div>
+          </div>
+
+          ${isCancelled ? `
+            <div class="py-6 px-8 bg-error/5 border border-error/10 rounded-xl flex items-center gap-4">
+                <span class="material-symbols-outlined text-error/40">cancel</span>
+                <p class="text-sm font-headline italic text-error/60 tracking-widest">此訂單已取消 (ORDER CANCELLED)</p>
+            </div>
+          ` : `
+            <!-- Status Dots (No Line) -->
+            <div class="flex justify-between items-center px-4 py-6 bg-surface-container-low/30 rounded-xl transition-all">
+              ${['未付款', '已付款', '已出貨', '已完成'].map((label, idx) => `
+                <div class="flex flex-col items-center gap-2">
+                  <div class="w-2.5 h-2.5 ${idx < status.step ? 'bg-secondary shadow-[0_0_10px_rgba(150,73,11,0.4)]' : 'bg-outline-variant/40'} rounded-full transition-all duration-500"></div>
+                  <span class="text-[9px] mt-1 uppercase tracking-widest ${idx < status.step ? 'text-primary font-bold' : 'text-on-surface-variant/50'}">${label}</span>
+                </div>
+              `).join('')}
+            </div>
+          `}
+          <p class="text-[11px] text-on-surface-variant italic pt-4">成立時間：${new Date(order.createdAt).toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        </div>
+      </div>
+    `;
+
+  } catch (error) {
+    console.error('Failed to load recent order:', error);
+    container.innerHTML = `<p class="text-center text-error">無法載入近期購入紀錄。</p>`;
+  }
+}
+
+function submitMemberSearch() {
+  const query = document.getElementById("memberSearchInput")?.value.trim() || "";
+  if (!query) return;
+  window.location.href = `../froggy_searchingPage/searchingPage.html?q=${encodeURIComponent(query)}`;
+}
+
+document
+  .getElementById("memberSearchButton")
+  ?.addEventListener("click", submitMemberSearch);
+
+document
+  .getElementById("memberSearchInput")
+  ?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      submitMemberSearch();
+    }
+  });
+
+document
+  .getElementById("overviewSavedBooksPrev")
+  ?.addEventListener("click", () => goToOverviewSavedBooksPage(-1));
+
+document
+  .getElementById("overviewSavedBooksNext")
+  ?.addEventListener("click", () => goToOverviewSavedBooksPage(1));
+
+loadMemberProfile();
+loadOverviewSavedBooks();
+loadRecentOrder();
+</script>
+<script src="../../bookstore_JS/auth.js"></script>
+</body></html>

@@ -1,0 +1,879 @@
+<!doctype html>
+
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>froggy書局 - 會員註冊</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#4f2f00",
+              "tertiary-fixed": "#ffddb9",
+              "on-secondary-fixed-variant": "#743400",
+              error: "#ba1a1a",
+              "primary-fixed-dim": "#aec7f7",
+              "surface-tint": "#465f88",
+              "on-primary-fixed": "#001b3d",
+              "on-tertiary-fixed-variant": "#623f0f",
+              "inverse-on-surface": "#f2f0ed",
+              background: "#fbf9f5",
+              "on-secondary-container": "#723300",
+              "surface-bright": "#fbf9f5",
+              "on-error": "#ffffff",
+              "inverse-surface": "#30312e",
+              secondary: "#96490b",
+              "secondary-container": "#ff9a59",
+              "outline-variant": "#c4c6cf",
+              "primary-container": "#1b365d",
+              "error-container": "#ffdad6",
+              primary: "#002046",
+              "surface-container-high": "#eae8e4",
+              "primary-fixed": "#d6e3ff",
+              "on-secondary-fixed": "#321300",
+              "surface-container": "#efeeea",
+              "on-background": "#1b1c1a",
+              outline: "#74777f",
+              "secondary-fixed-dim": "#ffb68b",
+              "on-tertiary-container": "#c6965e",
+              surface: "#fbf9f5",
+              "on-secondary": "#ffffff",
+              "secondary-fixed": "#ffdbc8",
+              "on-surface-variant": "#44474e",
+              "surface-container-low": "#f5f3ef",
+              "surface-variant": "#e4e2de",
+              "tertiary-fixed-dim": "#f1bd81",
+              "on-primary-fixed-variant": "#2e476f",
+              "surface-container-highest": "#e4e2de",
+              "on-primary": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "on-tertiary-fixed": "#2b1700",
+              "on-primary-container": "#87a0cd",
+              tertiary: "#321c00",
+              "surface-dim": "#dbdad6",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#93000a",
+              "inverse-primary": "#aec7f7",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {},
+            fontFamily: {
+              headline: ["Newsreader"],
+              display: ["Newsreader"],
+              body: ["Manrope"],
+              label: ["Manrope"],
+            },
+            fontSize: {},
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: theme("colors.background");
+        color: theme("colors.on-background");
+        font-family: theme("fontFamily.body");
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: theme("fontFamily.headline");
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col bg-surface">
+    <!-- TopAppBar -->
+    <nav
+      class="fixed top-0 w-full z-50 bg-[#002046] border-b border-primary/20"
+    >
+      <div
+        class="flex justify-between items-center px-8 md:px-16 py-5 w-full max-w-screen-2xl mx-auto"
+      >
+        <div class="flex items-center gap-12">
+          <a
+            class="text-2xl font-['Newsreader'] font-bold text-white"
+            href="../froggy_main/mainscreen.html"
+            >froggy書局</a
+          >
+          <div class="hidden md:flex gap-4 items-center">
+            <a
+              class="text-white/60 px-4 py-2 font-body uppercase tracking-widest text-[11px] hover:text-white transition-colors duration-300"
+              href="../froggy_main/mainscreen.html"
+              >首頁</a
+            >
+            <a
+              class="text-white/60 px-4 py-2 font-body uppercase tracking-widest text-[11px] hover:text-white transition-colors duration-300"
+              href="../froggy_new_book/new_book.html"
+              >新書</a
+            >
+            <a
+              class="px-4 py-2 rounded-lg font-body uppercase tracking-widest text-[11px] transition-colors duration-300 text-white/60 hover:text-white"
+              href="../froggy_rk/ranking.html"
+              >排行榜</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <a
+            class="scale-95 active:opacity-80 transition-all text-white flex items-center justify-center"
+            href="../froggy_cart/cart.html"
+            ><span class="material-symbols-outlined">shopping_bag</span></a
+          >
+          <a
+            class="active:opacity-80 transition-all text-white bg-white/10 rounded-lg p-2"
+            href="../../window_jp/froggy_login/login.html"
+          >
+            <span class="material-symbols-outlined">person</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- Main Content Canvas -->
+    <main
+      class="flex-grow flex items-center justify-center pt-32 pb-24 px-6 sm:px-8"
+    >
+      <div
+        class="w-full max-w-2xl bg-surface-container-lowest rounded-lg p-10 sm:p-16 shadow-[0_12px_40px_rgba(27,28,26,0.06)] outline outline-1 outline-outline-variant/15 relative overflow-hidden"
+      >
+        <div class="text-center mb-12">
+          <h1
+            class="text-4xl md:text-5xl font-display text-primary mb-4 italic"
+          >
+            加入會員
+          </h1>
+          <p class="font-body text-on-surface-variant text-sm tracking-wide">
+            成為 froggy書局 會員，開啟您的專屬閱讀旅程。
+          </p>
+        </div>
+        <form class="space-y-12" id="registerForm" novalidate>
+          <!-- Section 1: Account Information -->
+          <fieldset class="space-y-6">
+            <legend
+              class="font-display text-2xl text-primary border-b border-surface-variant/50 w-full pb-2 mb-6"
+            >
+              帳號資訊
+            </legend>
+            <div class="space-y-2">
+              <label
+                class="block font-body text-sm font-medium text-primary"
+                for="email"
+                >電子郵件 (作為登入帳號)
+                <span class="text-secondary">*</span></label
+              >
+              <input
+                class="w-full bg-surface-container-low border-none rounded focus:bg-surface-container-highest focus:ring-1 focus:ring-surface-tint font-body text-on-surface py-3 px-4 transition-colors"
+                id="email"
+                name="email"
+                required=""
+                type="email"
+              />
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label
+                  class="block font-body text-sm font-medium text-primary"
+                  for="password"
+                  >密碼 <span class="text-secondary">*</span></label
+                >
+                <input
+                  class="w-full bg-surface-container-low border-none rounded focus:bg-surface-container-highest focus:ring-1 focus:ring-surface-tint font-body text-on-surface py-3 px-4 transition-colors"
+                  id="password"
+                  name="password"
+                  required=""
+                  type="password"
+                />
+              </div>
+              <div class="space-y-2">
+                <label
+                  class="block font-body text-sm font-medium text-primary"
+                  for="confirm-password"
+                  >確認密碼 <span class="text-secondary">*</span></label
+                >
+                <input
+                  class="w-full bg-surface-container-low border-none rounded focus:bg-surface-container-highest focus:ring-1 focus:ring-surface-tint font-body text-on-surface py-3 px-4 transition-colors"
+                  id="confirm-password"
+                  name="confirm-password"
+                  required=""
+                  type="password"
+                />
+              </div>
+            </div>
+          </fieldset>
+          <!-- Section 2: Personal Details -->
+          <fieldset class="space-y-6">
+            <legend
+              class="font-display text-2xl text-primary border-b border-surface-variant/50 w-full pb-2 mb-6"
+            >
+              個人資料
+            </legend>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label
+                  class="block font-body text-sm font-medium text-primary"
+                  for="nickname"
+                  >暱稱 <span class="text-secondary">*</span></label
+                >
+                <input
+                  class="w-full bg-surface-container-low border-none rounded focus:bg-surface-container-highest focus:ring-1 focus:ring-surface-tint font-body text-on-surface py-3 px-4 transition-colors"
+                  id="nickname"
+                  name="nickname"
+                  required=""
+                  type="text"
+                />
+              </div>
+              <div class="space-y-2">
+                <label
+                  class="block font-body text-sm font-medium text-primary mb-3"
+                  >性別 <span class="text-secondary">*</span></label
+                >
+                <div class="flex flex-wrap gap-4">
+                  <label class="flex items-center gap-2 cursor-pointer group">
+                    <input
+                      class="text-primary focus:ring-primary bg-surface-container-low border-none"
+                      name="gender"
+                      required=""
+                      type="radio"
+                      value="male"
+                    />
+                    <span
+                      class="font-body text-sm text-on-surface-variant group-hover:text-primary transition-colors"
+                      >男性</span
+                    >
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer group">
+                    <input
+                      class="text-primary focus:ring-primary bg-surface-container-low border-none"
+                      name="gender"
+                      type="radio"
+                      value="female"
+                    />
+                    <span
+                      class="font-body text-sm text-on-surface-variant group-hover:text-primary transition-colors"
+                      >女性</span
+                    >
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer group">
+                    <input
+                      checked=""
+                      class="text-primary focus:ring-primary bg-surface-container-low border-none"
+                      name="gender"
+                      type="radio"
+                      value="undisclosed"
+                    />
+                    <span
+                      class="font-body text-sm text-on-surface-variant group-hover:text-primary transition-colors"
+                      >不公開</span
+                    >
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label
+                  class="block font-body text-sm font-medium text-primary"
+                  for="birthday"
+                  >生日 <span class="text-secondary">*</span></label
+                >
+                <div class="relative">
+                  <input
+                    class="w-full bg-surface-container-low border-none rounded focus:bg-surface-container-highest focus:ring-1 focus:ring-surface-tint font-body text-on-surface py-3 px-4 transition-colors cursor-pointer appearance-none"
+                    id="birthday"
+                    name="birthday"
+                    required=""
+                    type="date"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label
+                  class="block font-body text-sm font-medium text-primary"
+                  for="phone"
+                  >聯絡電話 <span class="text-secondary">*</span></label
+                >
+                <input
+                  class="w-full bg-surface-container-low border-none rounded focus:bg-surface-container-highest focus:ring-1 focus:ring-surface-tint font-body text-on-surface py-3 px-4 transition-colors"
+                  id="phone"
+                  name="phone"
+                  required=""
+                  type="tel"
+                />
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label
+                class="block font-body text-sm font-medium text-primary"
+                for="address"
+                >完整地址 <span class="text-secondary">*</span></label
+              >
+              <input
+                class="w-full bg-surface-container-low border-none rounded focus:bg-surface-container-highest focus:ring-1 focus:ring-surface-tint font-body text-on-surface py-3 px-4 transition-colors"
+                id="address"
+                name="address"
+                required=""
+                type="text"
+              />
+            </div>
+          </fieldset>
+          <!-- Section 3: Security Setup -->
+          <fieldset class="space-y-6">
+            <legend
+              class="font-display text-2xl text-primary border-b border-surface-variant/50 w-full pb-2 mb-6"
+            >
+              安全設定
+            </legend>
+            <div class="space-y-2">
+              <label
+                class="block font-body text-sm font-medium text-primary"
+                for="security-question"
+                >安全提問 <span class="text-secondary">*</span></label
+              >
+              <div class="relative">
+                <select
+                  class="w-full bg-surface-container-low bg-none border-none rounded focus:bg-surface-container-highest focus:ring-1 focus:ring-surface-tint font-body text-on-surface py-3 pl-4 pr-10 appearance-none transition-colors cursor-pointer"
+                  id="security-question"
+                  name="security-question"
+                  required=""
+                >
+                  <option disabled="" selected="" value="">
+                    請選擇一個安全提問...
+                  </option>
+                  <option value="q1">您第一所就讀的小學名稱？</option>
+                  <option value="q2">您最喜歡的一本書？</option>
+                  <option value="q3">您兒時的寵物名字？</option>
+                </select>
+                <span
+                  class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none"
+                  >expand_more</span
+                >
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label
+                class="block font-body text-sm font-medium text-primary"
+                for="security-answer"
+                >回答 <span class="text-secondary">*</span></label
+              >
+              <input
+                class="w-full bg-surface-container-low border-none rounded focus:bg-surface-container-highest focus:ring-1 focus:ring-surface-tint font-body text-on-surface py-3 px-4 transition-colors"
+                id="security-answer"
+                name="security-answer"
+                required=""
+                type="text"
+              />
+            </div>
+          </fieldset>
+          <!-- Submit Area -->
+          <div class="pt-8 flex flex-col items-center gap-6">
+            <button
+              class="w-full sm:w-auto bg-primary text-on-primary font-body font-medium tracking-wide py-4 px-12 rounded hover:opacity-90 transition-opacity bg-gradient-to-br from-primary to-primary-container shadow-md"
+              type="submit"
+            >
+              註冊帳號
+            </button>
+            <a
+              class="font-body text-sm text-primary hover:text-secondary border-b border-transparent hover:border-secondary transition-all pb-0.5"
+              href="../../window_jp/froggy_login/login.html"
+            >
+              已經有帳號了嗎？立即登入
+            </a>
+          </div>
+        </form>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full mt-auto bg-[#002046] dark:bg-slate-950">
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-center px-12 py-16 w-full max-w-screen-2xl mx-auto"
+      >
+        <div class="space-y-4 mb-8 md:mb-0">
+          <a
+            class="text-xl font-bold text-[#fbf9f5] dark:text-white font-headline"
+            href="#"
+            >froggy書局</a
+          >
+          <p class="text-[#fbf9f5]/70 font-body text-sm">
+            © 2024 froggy書局. 始於筆墨，承載智慧。
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-x-12 gap-y-4">
+        </div>
+        <div class="mt-8 md:mt-0 flex gap-6">
+        </div>
+      </div>
+    </footer>
+    <div
+      id="registerSuccessModal"
+      class="fixed inset-0 z-[120] hidden items-center justify-center bg-primary/60 px-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="registerSuccessTitle"
+    >
+      <div class="w-full max-w-sm rounded-2xl border border-primary/20 bg-background p-8 text-center shadow-2xl">
+        <div class="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-green-50 text-green-700">
+          <span class="material-symbols-outlined">check_circle</span>
+        </div>
+        <h2 id="registerSuccessTitle" class="font-headline text-2xl font-bold text-primary">
+          註冊成功
+        </h2>
+        <p class="mt-3 font-body text-sm leading-6 text-on-surface-variant">
+          會員資料已完成建立，請返回首頁登入會員。
+        </p>
+        <button
+          id="registerSuccessHomeButton"
+          class="mt-8 w-full rounded-xl bg-primary px-6 py-4 font-body text-sm font-bold tracking-[0.2em] text-on-primary transition-colors hover:bg-secondary"
+          type="button"
+        >
+          回首頁登入
+        </button>
+      </div>
+    </div>
+    <script>
+      const MEMBER_JSON_URL = "../../python/member.json";
+      const REGISTER_API_URL = "../../api/register";
+      const MEMBER_STORAGE_KEY = "froggyMembers";
+      const CURRENT_MEMBER_KEY = "froggyCurrentMember";
+      const COMMON_EMAIL_DOMAINS = new Set([
+        "gmail.com",
+        "yahoo.com",
+        "yahoo.com.tw",
+        "hotmail.com",
+        "outlook.com",
+        "icloud.com",
+        "msn.com",
+        "live.com",
+        "protonmail.com",
+        "mail.com",
+        "pchome.com.tw",
+        "seed.net.tw",
+        "hinet.net",
+      ]);
+      const TAIWAN_CITIES = [
+        "台北市",
+        "臺北市",
+        "新北市",
+        "桃園市",
+        "台中市",
+        "臺中市",
+        "台南市",
+        "臺南市",
+        "高雄市",
+        "基隆市",
+        "新竹市",
+        "新竹縣",
+        "苗栗縣",
+        "彰化縣",
+        "南投縣",
+        "雲林縣",
+        "嘉義市",
+        "嘉義縣",
+        "屏東縣",
+        "宜蘭縣",
+        "花蓮縣",
+        "台東縣",
+        "臺東縣",
+        "澎湖縣",
+        "金門縣",
+        "連江縣",
+      ];
+
+      function getStoredMembers() {
+        try {
+          return JSON.parse(localStorage.getItem(MEMBER_STORAGE_KEY) || "[]");
+        } catch {
+          return [];
+        }
+      }
+
+      function saveStoredMembers(members) {
+        localStorage.setItem(MEMBER_STORAGE_KEY, JSON.stringify(members));
+      }
+
+      async function getSeedMembers() {
+        try {
+          const response = await fetch(MEMBER_JSON_URL, { cache: "no-store" });
+          if (!response.ok) return [];
+          const data = await response.json();
+          return Array.isArray(data) ? data : [];
+        } catch {
+          return [];
+        }
+      }
+
+      async function getAllMembers() {
+        const seedMembers = await getSeedMembers();
+        return seedMembers;
+      }
+
+      function showRegisterMessage(message, type = "error") {
+        let box = document.getElementById("registerMessage");
+        if (!box) {
+          box = document.createElement("div");
+          box.id = "registerMessage";
+          box.setAttribute("role", "alert");
+          box.setAttribute("tabindex", "-1");
+          box.className = "rounded px-4 py-3 text-sm font-body";
+          document.getElementById("registerForm")?.prepend(box);
+        }
+        box.className =
+          type === "success"
+            ? "rounded px-4 py-3 text-sm font-body bg-green-50 text-green-700"
+            : "rounded px-4 py-3 text-sm font-body bg-error-container text-on-error-container";
+        box.textContent = message;
+
+        if (type !== "success") {
+          const topOffset = 110;
+          const targetTop =
+            box.getBoundingClientRect().top + window.pageYOffset - topOffset;
+          window.scrollTo({ top: Math.max(targetTop, 0), behavior: "smooth" });
+          window.setTimeout(() => box.focus({ preventScroll: true }), 250);
+        }
+      }
+
+      function reportRegisterError(fieldId, message) {
+        showRegisterMessage(message);
+        const field = document.getElementById(fieldId);
+        if (field) {
+          field.setAttribute("aria-invalid", "true");
+          field.classList.add("ring-2", "ring-red-500", "bg-red-50");
+        }
+      }
+
+      function clearRegisterErrors() {
+        document
+          .querySelectorAll("#registerForm [aria-invalid='true']")
+          .forEach((field) => {
+            field.removeAttribute("aria-invalid");
+            field.classList.remove("ring-2", "ring-red-500", "bg-red-50");
+          });
+      }
+
+      function showRegisterSuccessModal() {
+        const modal = document.getElementById("registerSuccessModal");
+        const button = document.getElementById("registerSuccessHomeButton");
+        modal?.classList.remove("hidden");
+        modal?.classList.add("flex");
+        document.body.classList.add("overflow-hidden");
+        window.setTimeout(() => button?.focus(), 100);
+      }
+
+      function goHomeAndOpenLogin() {
+        window.location.href = "../froggy_main/mainscreen.html?login=1";
+      }
+
+      function fieldValue(id) {
+        return document.getElementById(id)?.value.trim() || "";
+      }
+
+      function selectedGender() {
+        return document.querySelector('input[name="gender"]:checked')?.value || "";
+      }
+
+      function validateEmail(email) {
+        const match = email
+          .toLowerCase()
+          .match(/^[a-z0-9._%+-]+@([a-z0-9.-]+\.[a-z]{2,})$/);
+        return Boolean(match && COMMON_EMAIL_DOMAINS.has(match[1]));
+      }
+
+      function validatePassword(password) {
+        return (
+          /^[A-Za-z0-9]{1,20}$/.test(password) &&
+          /[A-Z]/.test(password) &&
+          /[a-z]/.test(password) &&
+          /\d/.test(password)
+        );
+      }
+
+      function validateNickname(nickname) {
+        return nickname.length > 0 && Array.from(nickname).length <= 20;
+      }
+
+      function validatePhone(phone) {
+        return /^09\d{8}$/.test(phone);
+      }
+
+      function validateTaiwanAddress(address) {
+        const taiwanCities = [
+          "\u53f0\u5317\u5e02",
+          "\u65b0\u5317\u5e02",
+          "\u6843\u5712\u5e02",
+          "\u53f0\u4e2d\u5e02",
+          "\u53f0\u5357\u5e02",
+          "\u9ad8\u96c4\u5e02",
+          "\u57fa\u9686\u5e02",
+          "\u65b0\u7af9\u5e02",
+          "\u5609\u7fa9\u5e02",
+          "\u65b0\u7af9\u7e23",
+          "\u82d7\u6817\u7e23",
+          "\u5f70\u5316\u7e23",
+          "\u5357\u6295\u7e23",
+          "\u96f2\u6797\u7e23",
+          "\u5609\u7fa9\u7e23",
+          "\u5c4f\u6771\u7e23",
+          "\u5b9c\u862d\u7e23",
+          "\u82b1\u84ee\u7e23",
+          "\u53f0\u6771\u7e23",
+          "\u6f8e\u6e56\u7e23",
+          "\u91d1\u9580\u7e23",
+          "\u9023\u6c5f\u7e23",
+        ];
+        const hasCity = taiwanCities.some((city) => address.includes(city));
+        const hasDistrict = /[^\s]+(\u5340|\u9109|\u93ae|\u5e02)/.test(address);
+        const hasStreet = /(\u8def|\u8857|\u5927\u9053|\u5df7|\u5f04)/.test(address);
+        const hasNumber = /\d+\u865f/.test(address);
+        return hasCity && hasDistrict && hasStreet && hasNumber;
+      }
+
+      function buildMember() {
+        return {
+          email: fieldValue("email").toLowerCase(),
+          password: fieldValue("password"),
+          nickname: fieldValue("nickname"),
+          gender: selectedGender(),
+          birthday: fieldValue("birthday"),
+          phone: fieldValue("phone"),
+          address: fieldValue("address"),
+          securityQuestion: fieldValue("security-question"),
+          securityAnswer: fieldValue("security-answer"),
+        };
+      }
+
+      async function registerMember(member) {
+        const response = await fetch(REGISTER_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(member),
+        });
+
+        let result = {};
+        try {
+          result = await response.json();
+        } catch {
+          result = {};
+        }
+
+        if (!response.ok || !result.ok) {
+          throw new Error(
+            result.message ||
+              "\u7121\u6cd5\u5beb\u5165\u6703\u54e1\u6a94\uff0c\u8acb\u78ba\u8a8d\u5df2\u4f7f\u7528 python server.py \u555f\u52d5\u7db2\u7ad9\u3002"
+          );
+        }
+
+        return result.member;
+      }
+
+      async function handleRegisterSubmit(event) {
+        event.preventDefault();
+        const member = buildMember();
+        const confirmPassword = fieldValue("confirm-password");
+
+        if (!validateEmail(member.email)) {
+          showRegisterMessage("電子郵件格式不正確，且目前僅接受常用信箱網域，例如 gmail、yahoo、hotmail、outlook、icloud。");
+          return;
+        }
+
+        const members = await getAllMembers();
+        if (members.some((item) => String(item.email).toLowerCase() === member.email)) {
+          showRegisterMessage("此電子郵件已註冊，請改用其他帳號或直接登入。");
+          return;
+        }
+
+        if (!validatePassword(member.password)) {
+          showRegisterMessage("密碼需包含大小寫英文字母與數字，最多 20 位，且不可包含符號。");
+          return;
+        }
+
+        if (member.password !== confirmPassword) {
+          showRegisterMessage("兩次輸入的密碼不一致。");
+          return;
+        }
+
+        if (!validateNickname(member.nickname)) {
+          showRegisterMessage("暱稱不可空白，且不可超過 20 字。");
+          return;
+        }
+
+        if (!member.gender || !member.birthday) {
+          showRegisterMessage("請完整填寫性別與生日。");
+          return;
+        }
+
+        if (!validatePhone(member.phone)) {
+          showRegisterMessage("連絡電話需為 09 開頭的 10 碼手機號碼。");
+          return;
+        }
+
+        if (!validateTaiwanAddress(member.address)) {
+          showRegisterMessage("地址需為完整台灣地址，請包含縣市、區鄉鎮市、路街巷弄與門牌號。");
+          return;
+        }
+
+        if (!member.securityQuestion || !member.securityAnswer) {
+          showRegisterMessage("請選擇安全性問題並填寫答案。");
+          return;
+        }
+
+        try {
+          const savedMember = await registerMember(member);
+          localStorage.setItem(
+            CURRENT_MEMBER_KEY,
+            JSON.stringify({ email: savedMember.email, nickname: savedMember.nickname })
+          );
+          showRegisterMessage(
+            "\u8a3b\u518a\u6210\u529f\uff0c\u6703\u54e1\u8cc7\u6599\u5df2\u5beb\u5165 member.json\uff0c\u6b63\u5728\u524d\u5f80\u767b\u5165\u9801\u3002",
+            "success"
+          );
+          window.setTimeout(() => {
+            window.location.href = "../../window_jp/froggy_login/login.html";
+          }, 900);
+        } catch (error) {
+          showRegisterMessage(error.message);
+        }
+        return;
+
+        const storedMembers = getStoredMembers();
+        storedMembers.push(member);
+        saveStoredMembers(storedMembers);
+        localStorage.setItem(CURRENT_MEMBER_KEY, JSON.stringify({ email: member.email }));
+        showRegisterMessage("註冊成功，會員資料已保存。即將前往登入頁。", "success");
+        window.setTimeout(() => {
+          window.location.href = "../../window_jp/froggy_login/login.html";
+        }, 900);
+      }
+
+      async function handleRegisterSubmit(event) {
+        event.preventDefault();
+        clearRegisterErrors();
+
+        const member = buildMember();
+        const confirmPassword = fieldValue("confirm-password");
+
+        if (!validateEmail(member.email)) {
+          reportRegisterError(
+            "email",
+            "電子郵件不符合規定：請輸入有效信箱，且需使用常見信箱網域，例如 gmail、yahoo、hotmail、outlook 或 icloud。"
+          );
+          return;
+        }
+
+        const members = await getAllMembers();
+        if (members.some((item) => String(item.email).toLowerCase() === member.email)) {
+          reportRegisterError("email", "電子郵件不符合規定：此帳號已經註冊過。");
+          return;
+        }
+
+        if (!validatePassword(member.password)) {
+          reportRegisterError(
+            "password",
+            "密碼不符合規定：需包含大寫英文、小寫英文與數字，最多 20 位，且不可使用符號。"
+          );
+          return;
+        }
+
+        if (member.password !== confirmPassword) {
+          reportRegisterError("confirm-password", "確認密碼不符合規定：兩次輸入的密碼不一致。");
+          return;
+        }
+
+        if (!validateNickname(member.nickname)) {
+          reportRegisterError("nickname", "暱稱不符合規定：不可空白，且最多 20 字。");
+          return;
+        }
+
+        if (!member.gender) {
+          showRegisterMessage("性別不符合規定：請選擇性別。");
+          return;
+        }
+
+        if (!member.birthday) {
+          reportRegisterError("birthday", "生日不符合規定：請選擇生日。");
+          return;
+        }
+
+        if (!validatePhone(member.phone)) {
+          reportRegisterError("phone", "聯絡電話不符合規定：請輸入 09 開頭的 10 碼手機號碼。");
+          return;
+        }
+
+        if (members.some((item) => String(item.phone).trim() === member.phone)) {
+          reportRegisterError("phone", "聯絡電話不符合規定：此電話號碼已被其他帳號使用。");
+          return;
+        }
+
+        if (!validateTaiwanAddress(member.address)) {
+          reportRegisterError(
+            "address",
+            "完整地址不符合規定：請輸入台灣地址，且需包含縣市、區/鄉/鎮/市、路/街/大道/巷/弄與門牌號。"
+          );
+          return;
+        }
+
+        if (!member.securityQuestion) {
+          reportRegisterError("security-question", "安全性問題不符合規定：請選擇一個安全性問題。");
+          return;
+        }
+
+        if (!member.securityAnswer) {
+          reportRegisterError("security-answer", "安全性問題回答不符合規定：請輸入回答。");
+          return;
+        }
+
+        try {
+          const savedMember = await registerMember(member);
+          localStorage.setItem(
+            CURRENT_MEMBER_KEY,
+            JSON.stringify({ email: savedMember.email, nickname: savedMember.nickname })
+          );
+          showRegisterSuccessModal();
+        } catch (error) {
+          showRegisterMessage(error.message);
+        }
+      }
+
+      document
+        .getElementById("registerSuccessHomeButton")
+        ?.addEventListener("click", goHomeAndOpenLogin);
+
+      document
+        .getElementById("registerForm")
+        ?.addEventListener("submit", handleRegisterSubmit);
+    </script>
+  </body>
+</html>

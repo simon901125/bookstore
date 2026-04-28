@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>froggy書局 | 書籍排行榜</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif+TC:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f2f0ed",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#ffb68b",
+                        "on-primary-fixed": "#001b3d",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#002046",
+                        "outline": "#74777f",
+                        "on-secondary-container": "#723300",
+                        "primary-container": "#1b365d",
+                        "inverse-surface": "#30312e",
+                        "surface-container": "#efeeea",
+                        "surface-bright": "#fbf9f5",
+                        "on-surface": "#1b1c1a",
+                        "outline-variant": "#c4c6cf",
+                        "on-surface-variant": "#44474e",
+                        "tertiary": "#321c00",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#aec7f7",
+                        "on-primary-container": "#87a0cd",
+                        "secondary": "#96490b",
+                        "tertiary-fixed": "#ffddb9",
+                        "on-tertiary-fixed": "#2b1700",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#465f88",
+                        "on-secondary-fixed": "#321300",
+                        "on-primary-fixed-variant": "#2e476f",
+                        "on-tertiary-fixed-variant": "#623f0f",
+                        "surface-container-highest": "#e4e2de",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-variant": "#e4e2de",
+                        "surface-dim": "#dbdad6",
+                        "secondary-fixed": "#ffdbc8",
+                        "surface-container-high": "#eae8e4",
+                        "on-tertiary-container": "#c6965e",
+                        "on-secondary": "#ffffff",
+                        "background": "#fbf9f5",
+                        "tertiary-container": "#4f2f00",
+                        "surface": "#fbf9f5",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#ff9a59",
+                        "surface-container-low": "#f5f3ef",
+                        "inverse-primary": "#aec7f7",
+                        "tertiary-fixed-dim": "#f1bd81",
+                        "on-background": "#1b1c1a",
+                        "on-secondary-fixed-variant": "#743400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "Noto Serif TC", "serif"],
+                        "display": ["Newsreader", "Noto Serif TC", "serif"],
+                        "body": ["Manrope", "system-ui", "sans-serif"],
+                        "label": ["Manrope", "system-ui", "sans-serif"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f5;
+            font-family: 'Manrope', 'system-ui', sans-serif;
+            color: #1b1c1a;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, .serif-heading {
+            font-family: 'Newsreader', 'Noto Serif TC', serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #fbf9f5;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #00204620;
+        }
+        .book-item-grid {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-background selection:bg-secondary/20"><!-- Login Modal Overlay -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-primary/60 backdrop-blur-sm px-4" id="loginModal" style="display: none;">
+<div class="relative w-full max-w-md bg-background border border-primary/20 rounded-2xl p-10 shadow-2xl">
+<!-- Home Link (Top Right) -->
+<button class="absolute top-6 right-8 text-primary/40 hover:text-primary transition-colors" onclick="document.getElementById('loginModal').style.display='none'"><span class="material-symbols-outlined text-2xl">close</span></button>
+<!-- Modal Header / Title -->
+<div class="flex flex-col items-center mb-10 pt-4">
+<div class="border-2 border-primary rounded-full px-12 py-4 mb-2 bg-primary">
+<h2 class="text-2xl font-headline font-bold tracking-widest text-on-primary">會員登入</h2>
+</div>
+<!-- Register Link -->
+<div class="w-full flex justify-end px-4">
+<a class="text-sm font-bold font-label text-primary hover:text-secondary transition-colors tracking-widest underline underline-offset-4" href="../froggy_register/froggy_register.html">會員註冊</a>
+</div>
+</div>
+<!-- Login Form -->
+<form class="space-y-6">
+<div class="space-y-4 px-4 py-8 border border-primary/10 rounded-xl bg-surface-container-low/30">
+<!-- Account Input -->
+<div class="space-y-1.5">
+<label class="block text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant/60 ml-1">帳號</label>
+<input class="w-full bg-white border border-primary/10 px-4 py-3 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary text-sm font-body outline-none transition-all placeholder:text-on-surface-variant/30" placeholder="輸入帳號" type="text"/>
+</div>
+<!-- Password Input -->
+<div class="space-y-1.5">
+<label class="block text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant/60 ml-1">密碼</label>
+<input class="w-full bg-white border border-primary/10 px-4 py-3 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary text-sm font-body outline-none transition-all placeholder:text-on-surface-variant/30" placeholder="輸入密碼" type="password"/>
+</div>
+<!-- Forgot Links -->
+<div class="flex justify-end gap-3 pt-1">
+  <a
+    class="text-[10px] font-label text-on-surface-variant/50 hover:text-secondary cursor-pointer relative z-[110]"
+    href="/window_jp/froggy_passwordForget/password_forget.html"
+    >忘記密碼</a
+  >
+  <span class="text-[10px] text-on-surface-variant/30">|</span>
+  <a
+    class="text-[10px] font-label text-on-surface-variant/50 hover:text-secondary cursor-pointer relative z-[110]"
+    href="/window_jp/froggy_email_forget/email_forget.html"
+    >忘記帳號</a
+  >
+</div>
+<!-- Login Button -->
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-body text-sm font-bold tracking-[0.3em] hover:bg-secondary hover:shadow-lg transition-all duration-300 mt-8" type="submit">
+                    登入
+                </button>
+</div>
+</form>
+</div>
+</div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#002046] border-b border-primary/20">
+<div class="flex justify-between items-center px-8 md:px-16 py-5 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-['Newsreader'] font-bold text-white" href="../froggy_main/mainscreen.html">froggy書局</a>
+<div class="hidden md:flex gap-4 items-center">
+<a class="text-white/60 px-4 py-2 font-body uppercase tracking-widest text-[11px] hover:text-white transition-colors duration-300" href="../froggy_main/mainscreen.html">首頁</a>
+<a class="text-white/60 px-4 py-2 font-body uppercase tracking-widest text-[11px] hover:text-white transition-colors duration-300" href="../froggy_new_book/new_book.html">新書</a>
+<a class="text-white bg-white/10 px-4 py-2 rounded-lg font-body uppercase tracking-widest text-[11px] transition-colors duration-300" href="../froggy_rk/ranking.html">排行榜</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<a class="scale-95 active:opacity-80 transition-all text-white flex items-center justify-center" href="../froggy_cart/cart.html"><span class="material-symbols-outlined">shopping_bag</span></a>
+<a class="scale-95 active:opacity-80 transition-all text-white" href="../../window_jp/froggy_login/login.html">
+<span class="material-symbols-outlined">person</span>
+</a>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 max-w-screen-2xl mx-auto px-8 md:px-16">
+<div class="grid grid-cols-12 gap-12">
+<!-- Sidebar: Categories -->
+<aside class="col-span-12 md:col-span-3 lg:col-span-2">
+<div class="bg-surface-container-low/50 p-8 rounded-2xl sticky top-32 border border-surface-container-highest/50 max-h-[calc(100vh-10rem)] flex flex-col">
+<section class="flex min-h-0 flex-col">
+<h3 class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 mb-6">全部分類</h3>
+<ul class="space-y-3 overflow-y-auto overscroll-contain pr-2 custom-scrollbar">
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">文學小說</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">商業理財</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">藝術設計</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">人文社科</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">心理勵志</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">宗教命理</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">自然科普</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">醫療保健</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">飲食</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">生活風格</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">旅遊</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">童書/青少年文學</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">國中小參考書</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">親子教養</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">影視偶像</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">輕小說</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">漫畫/圖文書</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">語言學習</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">考試用書</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">電腦資訊</a></li>
+<li><a class="font-body text-sm text-primary hover:text-secondary transition-colors block" href="#">專業/教科書/政府出版品</a></li>
+</ul>
+</section>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="col-span-12 md:col-span-9 lg:col-span-10">
+<div class="space-y-12">
+<!-- Search Bar -->
+<div class="w-full">
+<div class="flex items-center bg-surface-container-low px-6 py-4 rounded-full group focus-within:bg-white transition-all border border-surface-container-highest focus-within:border-primary/20 shadow-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">search</span>
+<input data-site-search-input class="bg-transparent border-none focus:ring-0 text-base font-body w-full px-4 placeholder:text-on-surface-variant/50" placeholder="搜尋書名、作者、ISBN..." type="text"/>
+<button data-site-search-button class="bg-primary text-on-primary p-2.5 rounded-full flex items-center justify-center transition-transform hover:scale-105" type="button">
+<span class="material-symbols-outlined text-base">search</span>
+</button>
+</div>
+</div>
+<!-- Main Content Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
+<div class="space-y-1">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">The Best Sellers Selection</span>
+<h1 class="text-5xl md:text-7xl font-headline italic text-primary">書籍排行榜</h1>
+</div>
+<div class="flex items-center gap-4">
+<button id="bestSellerTab" class="bg-primary text-on-primary px-8 py-3 text-[11px] font-label uppercase tracking-widest rounded-lg hover:opacity-90 transition-opacity">暢銷榜</button>
+<button id="newBookTab" class="bg-surface-container-high text-on-surface-variant px-8 py-3 text-[11px] font-label uppercase tracking-widest rounded-lg hover:bg-surface-container-highest transition-colors">新書榜</button>
+</div>
+</div>
+<!-- Rankings Grid -->
+<div id="rankingBooksGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-12 gap-y-16">
+<!-- Book Item #1 -->
+<div class="book-item-grid group cursor-pointer">
+<div class="aspect-[3/4] mb-4 overflow-hidden bg-surface-container rounded-lg shadow-sm transition-transform duration-500 group-hover:-translate-y-2 relative">
+<span class="absolute top-0 left-0 z-10 bg-secondary text-white font-headline px-3 py-1 text-xl italic">#1</span>
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-aq_kIw7SUAWBzPS6a_ZNN3F-TQaBRBq5gO4g_XlFE8J1MAWh2OR5pkcS6c7Nm2nZFTHtxh3sOEgYWLnJ0ATXW7DHVhUHv8bRTCO1VKpZiXOcLn3e_Ybazm9px5qh4vEBfYjsdmaHnfjs-CwYQ41zZk3_24bWu9HUh8asRU7lOrfCxpuTB8JV6aZCyrLN_53BQ93FhYhEhIS6xzAZVKjlHxi7D47W0Abi5rFTkrMhI4JrLJayPr_exoMV0SkBjkZ3lsuHWk9ty9tM"/>
+</div>
+<h3 class="font-headline italic text-xl text-primary mb-1 group-hover:text-secondary transition-colors leading-snug truncate">餘生：一位檔案保管員的沉默證據</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">艾力克斯．羅西</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="font-body text-sm font-semibold text-primary">NT$ 356</span>
+<span class="text-[10px] border border-error text-error px-1.5 py-0.5 font-bold rounded">79折</span>
+</div>
+</div>
+<!-- Book Item #2 -->
+<div class="book-item-grid group cursor-pointer">
+<div class="aspect-[3/4] mb-4 overflow-hidden bg-surface-container rounded-lg shadow-sm transition-transform duration-500 group-hover:-translate-y-2 relative">
+<span class="absolute top-0 left-0 z-10 bg-primary text-white font-headline px-3 py-1 text-xl italic">#2</span>
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUrO9Dba7ksUcBmxfgCMRjDnwyX_3UqjllVzHWy6RtSBxagQX5T1omqmbvVPsox2qVzBmghQTwMSg_pVQ7hmWC8fzwJlEqk_F9wz48ODcq0XAIHj1LldlZigShE2dNd4SqVo-Jb0lbo5kvoPDjW2L-wdBvnztY7WOhiTCWjyN1UKGqr1Uk6qQJfCNIwQno9wS__af4PqkRiAdsnGVZrxsUJzmXz2wTNQgX0yblejq0NDn9PQJOwS6QC5bW2xnH9RnBP5Ol3t3b-V0A"/>
+</div>
+<h3 class="font-headline italic text-xl text-primary mb-1 group-hover:text-secondary transition-colors leading-snug truncate">時間的秩序：在光中尋找永恆</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">卡洛．羅維理</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="font-body text-sm font-semibold text-primary">NT$ 420</span>
+<span class="text-[10px] border border-error text-error px-1.5 py-0.5 font-bold rounded">85折</span>
+</div>
+</div>
+<!-- Book Item #3 -->
+<div class="book-item-grid group cursor-pointer">
+<div class="aspect-[3/4] mb-4 overflow-hidden bg-surface-container rounded-lg shadow-sm transition-transform duration-500 group-hover:-translate-y-2 relative">
+<span class="absolute top-0 left-0 z-10 bg-primary text-white font-headline px-3 py-1 text-xl italic">#3</span>
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt1v_xCWgnUTX8irzzsHfEr4G02lipfFbWiBt3MXXj2ky6Juc5rJSzwoiBTvO9-1oioa41N8wu2CLkGb7v_T5gyUIwTDBwvF60MdIfsbzgHu_ZEauoajdKuqZnWe2PO4eidceXr0xo6De-PB0Sf6xhGPXS-P9EdI-CnjVR1k56r82Nvjn6v14oeZYmvkAGtGxoIP766KvsaR-jV1I6ISM3gj6mWF9OPSi6zslknzx_WR7BgIvpYbuycb83OnX5LR0em7Yj_u4EHBrU"/>
+</div>
+<h3 class="font-headline italic text-xl text-primary mb-1 group-hover:text-secondary transition-colors leading-snug truncate">納瓦爾寶典：從白手起家到財富自由</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">艾瑞克．喬根森</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="font-body text-sm font-semibold text-primary">NT$ 316</span>
+<span class="text-[10px] border border-error text-error px-1.5 py-0.5 font-bold rounded">79折</span>
+</div>
+</div>
+<!-- Book Item #4 -->
+<div class="book-item-grid group cursor-pointer">
+<div class="aspect-[3/4] mb-4 overflow-hidden bg-surface-container rounded-lg shadow-sm transition-transform duration-500 group-hover:-translate-y-2 relative">
+<span class="absolute top-0 left-0 z-10 bg-surface-container-highest text-primary font-headline px-3 py-1 text-xl italic">#4</span>
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFAmzdprsuY-QpGL6A_vDzzWkSE1vV4vyEsUurlNzEBCU-7P4_6aDEqa4DCbaME0ryx2SJxqdQpGeIrlcI3Rn2e3DwdS-uYE1zITVxRsruFKIINGPqVCO7aoZOYdngqR84P3oIBsSgiHVl5bxniWD_BppJtXR01E6oIwEp_sYGUly7JKyD3jTU3fZnq_YkbK0In1TQj57szH3WnK1K_bJdnIKIpMIJ_ZhEpmgg3pxTs1lxho2EAkTGtrEuL8BQAGTZC5cbx2ytA7re"/>
+</div>
+<h3 class="font-headline italic text-xl text-primary mb-1 group-hover:text-secondary transition-colors leading-snug truncate">大滅絕後：人類文明的新啟程</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">伊莉莎白．科爾伯特</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="font-body text-sm font-semibold text-primary">NT$ 380</span>
+<span class="text-[10px] border border-error text-error px-1.5 py-0.5 font-bold rounded">9折</span>
+</div>
+</div>
+<!-- Book Item #5 -->
+<div class="book-item-grid group cursor-pointer">
+<div class="aspect-[3/4] mb-4 overflow-hidden bg-surface-container rounded-lg shadow-sm transition-transform duration-500 group-hover:-translate-y-2 relative">
+<span class="absolute top-0 left-0 z-10 bg-surface-container-highest text-primary font-headline px-3 py-1 text-xl italic">#5</span>
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKK8v_Qo4ST4OSKeK8TAtA2NeLjl93gwYaZQzAza17oWg0jJBZDkss_M2fZ1FK1bmf96rDyU45AjtxVJrTlRt-dga35vR1xTNA-N2NzskZS2dyXa-2XGU4bitVwmcxFnfdMR5hok4e96RhHyNxWYwg4Zsll4yV9mxZj_dsrFw6IgQGQW0NnrYn3YKNo0YnLoXK0ihquhNTno9AB1veLM2pFHTYOhNdXikxrhZN_4ZVOtJh1MlHQjBxu-0OKxsnr5KyQIJlz3UWJBRB"/>
+</div>
+<h3 class="font-headline italic text-xl text-primary mb-1 group-hover:text-secondary transition-colors leading-snug truncate">隱谷路：一個家庭與其遺傳之謎</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">羅伯特．科爾克</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="font-body text-sm font-semibold text-primary">NT$ 442</span>
+<span class="text-[10px] border border-error text-error px-1.5 py-0.5 font-bold rounded">85折</span>
+</div>
+</div>
+<!-- Fill items 6-50 (simplified for display) -->
+<div class="col-span-full py-16 flex flex-col items-center justify-center border-t border-surface-container mt-12">
+<p class="font-body text-sm text-on-surface-variant opacity-40 italic tracking-widest mb-12">載入更多排行榜內容 (6 至 50 名)...</p>
+<div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-12 w-full opacity-30 pointer-events-none">
+<div class="aspect-[3/4] bg-surface-container-high rounded-lg"></div>
+<div class="aspect-[3/4] bg-surface-container-high rounded-lg"></div>
+<div class="aspect-[3/4] bg-surface-container-high rounded-lg"></div>
+<div class="aspect-[3/4] bg-surface-container-high rounded-lg"></div>
+<div class="aspect-[3/4] bg-surface-container-high rounded-lg"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-24 bg-[#002046] dark:bg-slate-950">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center px-12 py-16 w-full max-w-screen-2xl mx-auto">
+<div class="space-y-4 mb-8 md:mb-0">
+<a class="text-xl font-bold text-[#fbf9f5] dark:text-white font-headline" href="#">froggy書局</a>
+<p class="text-[#fbf9f5]/70 font-body text-sm">© 2024 froggy書局. 始於筆墨，承載智慧。</p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4">
+</div>
+<div class="mt-8 md:mt-0 flex gap-6">
+</div></div>
+</footer>
+<!-- Back to Top Button -->
+<button class="fixed bottom-8 right-8 w-12 h-12 bg-primary text-on-primary flex flex-col items-center justify-center rounded-lg shadow-xl hover:bg-secondary transition-all z-[60] group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+<span class="material-symbols-outlined text-base leading-none mb-0.5 group-hover:-translate-y-0.5 transition-transform">keyboard_double_arrow_up</span>
+<span class="text-[9px] font-bold tracking-tighter">TOP</span>
+</button>
+<script>
+function submitSiteSearch() {
+  const input = document.querySelector("[data-site-search-input]");
+  const query = input?.value.trim() || "";
+  if (!query) return;
+  window.location.href = `../froggy_searchingPage/searchingPage.html?q=${encodeURIComponent(query)}`;
+}
+
+document
+  .querySelector("[data-site-search-button]")
+  ?.addEventListener("click", submitSiteSearch);
+
+document
+  .querySelector("[data-site-search-input]")
+  ?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      submitSiteSearch();
+    }
+  });
+
+const CATEGORY_LINK_IDS = [
+  "C001",
+  "C002",
+  "C003",
+  "C004",
+  "C005",
+  "C006",
+  "C007",
+  "C008",
+  "C009",
+  "C010",
+  "C011",
+  "C012",
+  "C013",
+  "C014",
+  "C015",
+  "C016",
+  "C017",
+  "C018",
+  "C019",
+  "C020",
+  "C021",
+];
+
+document.querySelectorAll("aside ul li a").forEach((link, index) => {
+  const categoryId = CATEGORY_LINK_IDS[index];
+  if (!categoryId) return;
+  link.href = `../froggy_searchingPage/searchingPage.html?category=${categoryId}`;
+  link.dataset.categoryId = categoryId;
+});
+
+const BOOKS_JSON_URL = "../../python/books.json";
+const RANKING_LIMIT = 100;
+let rankingBooks = [];
+let activeRankingMode = "bestSeller";
+
+function parseDiscountRate(label) {
+  const match = String(label || "").match(/^(\d+)\u6298$/);
+  if (!match) return null;
+  const discountNumber = Number(match[1]);
+  return discountNumber >= 10 ? discountNumber / 100 : discountNumber / 10;
+}
+
+function formatPrice(price) {
+  return `NT$ ${Number(price || 0).toLocaleString("zh-TW")}`;
+}
+
+function bookDetailUrl(book) {
+  return `../froggy_bookPage/bookPage.html?isbn=${encodeURIComponent(book.isbn)}`;
+}
+
+function rankBadgeClass(rank) {
+  if (rank === 1) return "absolute top-0 left-0 z-10 bg-secondary text-white font-headline px-3 py-1 text-xl italic";
+  if (rank <= 3) return "absolute top-0 left-0 z-10 bg-primary text-white font-headline px-3 py-1 text-xl italic";
+  return "absolute top-0 left-0 z-10 bg-surface-container-highest text-primary font-headline px-3 py-1 text-xl italic";
+}
+
+function createPriceElement(book) {
+  const price = Number(book.price || 0);
+  const discountRate = parseDiscountRate(book.promotionLabel);
+  const priceWrap = document.createElement("div");
+  priceWrap.className = "flex items-center gap-2 mt-3 flex-wrap";
+
+  if (discountRate && discountRate < 1) {
+    const originalPrice = document.createElement("span");
+    originalPrice.className = "font-body text-sm text-on-surface-variant/60 line-through";
+    originalPrice.textContent = formatPrice(price);
+
+    const salePrice = document.createElement("span");
+    salePrice.className = "font-body text-sm font-semibold text-error";
+    salePrice.textContent = formatPrice(Math.round(price * discountRate));
+
+    const badge = document.createElement("span");
+    badge.className = "text-[10px] border border-error text-error px-1.5 py-0.5 font-bold rounded";
+    badge.textContent = book.promotionLabel;
+
+    priceWrap.append(originalPrice, salePrice, badge);
+    return priceWrap;
+  }
+
+  const regularPrice = document.createElement("span");
+  regularPrice.className = "font-body text-sm font-semibold text-primary";
+  regularPrice.textContent = formatPrice(price);
+  priceWrap.appendChild(regularPrice);
+  return priceWrap;
+}
+
+function createRankingCard(book, index) {
+  const rank = index + 1;
+  const card = document.createElement("div");
+  card.className = "book-item-grid group cursor-pointer";
+  card.tabIndex = 0;
+  card.setAttribute("role", "link");
+  card.setAttribute("aria-label", `Open rank ${rank} book detail page`);
+
+  const openBook = () => {
+    window.location.href = bookDetailUrl(book);
+  };
+  card.addEventListener("click", openBook);
+  card.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openBook();
+    }
+  });
+
+  const coverWrap = document.createElement("div");
+  coverWrap.className = "aspect-[3/4] mb-4 overflow-hidden bg-surface-container rounded-lg shadow-sm transition-transform duration-500 group-hover:-translate-y-2 relative";
+
+  const rankBadge = document.createElement("span");
+  rankBadge.className = rankBadgeClass(rank);
+  rankBadge.textContent = `#${rank}`;
+
+  const cover = document.createElement("img");
+  cover.className = "w-full h-full object-cover";
+  cover.src = book.coverUrl || "../../bookstore_DB/bookPicture/getImage.png";
+  cover.alt = book.title || "Book cover";
+  cover.loading = "lazy";
+  coverWrap.append(rankBadge, cover);
+
+  const title = document.createElement("h3");
+  title.className = "font-headline italic text-xl text-primary mb-1 group-hover:text-secondary transition-colors leading-snug truncate";
+  title.textContent = book.title || "Untitled";
+
+  const author = document.createElement("p");
+  author.className = "font-label text-[10px] uppercase tracking-widest text-on-surface-variant";
+  author.textContent = book.author || "Unknown Author";
+
+  card.append(coverWrap, title, author, createPriceElement(book));
+  return card;
+}
+
+function getBestSellerBooks(books) {
+  return [...books]
+    .sort((a, b) => Number(b.salesCount || 0) - Number(a.salesCount || 0))
+    .slice(0, RANKING_LIMIT);
+}
+
+function getNewBookRankingBooks(books) {
+  return [...books]
+    .sort((a, b) => String(b.listedAt || "").localeCompare(String(a.listedAt || "")))
+    .slice(0, RANKING_LIMIT)
+    .sort((a, b) => Number(b.salesCount || 0) - Number(a.salesCount || 0));
+}
+
+function setActiveTab(mode) {
+  activeRankingMode = mode;
+  const bestSellerTab = document.getElementById("bestSellerTab");
+  const newBookTab = document.getElementById("newBookTab");
+  const activeClass = "bg-primary text-on-primary px-8 py-3 text-[11px] font-label uppercase tracking-widest rounded-lg hover:opacity-90 transition-opacity";
+  const inactiveClass = "bg-surface-container-high text-on-surface-variant px-8 py-3 text-[11px] font-label uppercase tracking-widest rounded-lg hover:bg-surface-container-highest transition-colors";
+
+  if (bestSellerTab) bestSellerTab.className = mode === "bestSeller" ? activeClass : inactiveClass;
+  if (newBookTab) newBookTab.className = mode === "newBook" ? activeClass : inactiveClass;
+}
+
+function renderRankingGrid(mode = activeRankingMode) {
+  const grid = document.getElementById("rankingBooksGrid");
+  if (!grid) return;
+
+  const sortedBooks = mode === "newBook"
+    ? getNewBookRankingBooks(rankingBooks)
+    : getBestSellerBooks(rankingBooks);
+
+  setActiveTab(mode);
+  grid.replaceChildren(...sortedBooks.map(createRankingCard));
+}
+
+async function loadRankingBooks() {
+  const grid = document.getElementById("rankingBooksGrid");
+  if (!grid) return;
+
+  try {
+    const response = await fetch(BOOKS_JSON_URL);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const books = await response.json();
+    rankingBooks = books.filter((book) => book && book.title);
+
+    renderRankingGrid("bestSeller");
+  } catch (error) {
+    console.error("Failed to load ranking books:", error);
+    grid.innerHTML = '<p class="col-span-full font-body text-sm text-on-surface-variant">\u76ee\u524d\u7121\u6cd5\u8f09\u5165\u6392\u884c\u699c\u8cc7\u6599\u3002</p>';
+  }
+}
+
+document.getElementById("bestSellerTab")?.addEventListener("click", () => renderRankingGrid("bestSeller"));
+document.getElementById("newBookTab")?.addEventListener("click", () => renderRankingGrid("newBook"));
+loadRankingBooks();
+</script>
+<script src="../../bookstore_JS/auth.js"></script>
+</body></html>

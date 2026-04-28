@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>froggy書局 | 訂單詳情</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif+TC:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#002046",
+                        "secondary": "#96490b",
+                        "background": "#fbf9f5",
+                        "surface": "#fbf9f5",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1c1a",
+                        "on-surface": "#1b1c1a",
+                        "on-surface-variant": "#44474e",
+                        "outline": "#74777f",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-container": "#efeeea",
+                        "surface-container-high": "#eae8e4",
+                        "surface-container-highest": "#e4e2de",
+                        "error": "#ba1a1a",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "Noto Serif TC", "serif"],
+                        "display": ["Newsreader", "Noto Serif TC", "serif"],
+                        "body": ["Manrope", "system-ui", "sans-serif"],
+                        "label": ["Manrope", "system-ui", "sans-serif"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f5;
+            font-family: 'Manrope', 'system-ui', sans-serif;
+            color: #1b1c1a;
+        }
+        h1, h2, h3, .serif-heading {
+            font-family: 'Newsreader', 'Noto Serif TC', serif;
+        }
+        .user-menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            z-index: 100;
+        }
+        .user-menu-container:hover .user-menu-dropdown {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Top Navigation Bar (Branding & Global Search) -->
+<nav class="fixed top-0 w-full z-50 bg-[#002046] border-b border-primary/20">
+<div class="flex justify-between items-center px-8 md:px-16 py-5 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-['Newsreader'] font-bold text-white" href="../froggy_main/mainscreen.html">froggy書局</a>
+</div>
+<div class="flex-grow max-w-2xl px-12 hidden md:block">
+<div class="flex items-center bg-white/10 px-6 py-3 rounded-full group focus-within:bg-white/20 transition-all border border-white/10 focus-within:border-white/30 shadow-sm">
+<span class="material-symbols-outlined text-white/50 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-body w-full px-4 text-white placeholder:text-white/40" placeholder="搜尋書名、作者、ISBN..." type="text"/>
+<button class="text-white/70 hover:text-white transition-transform hover:scale-110">
+<span class="material-symbols-outlined text-lg">search</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative user-menu-container order-2">
+<a class="flex items-center gap-3 py-2 px-3 hover:bg-white/10 rounded-lg transition-all text-white" href="../../window_jp/froggy_login/login.html">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-bold tracking-widest">黃金會員</span>
+</a>
+<div class="user-menu-dropdown pt-2">
+<div class="w-56 bg-surface-container-lowest border border-outline-variant shadow-2xl rounded-xl overflow-hidden">
+<div class="p-5 border-b border-outline-variant bg-surface-container-low">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+</div>
+<div>
+<p class="text-xs font-bold text-primary">黃金會員</p>
+<p class="text-[10px] text-on-surface-variant">A. Sterling</p>
+</div>
+</div>
+</div>
+<div class="py-2">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span class="tracking-widest">總覽</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">local_shipping</span>
+<span class="tracking-widest">訂單詳情</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">library_books</span>
+<span class="tracking-widest">收藏書</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">manage_accounts</span>
+<span class="tracking-widest">會員資料修改</span>
+</a>
+</div>
+<div class="border-t border-outline-variant py-2 bg-surface-container-low/30">
+<a class="flex items-center gap-3 px-5 py-3 text-sm text-error hover:bg-error/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="tracking-widest font-bold">登出</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<a class="text-white/70 hover:text-white flex items-center order-1" href="../froggy_cart/cart.html">
+<span class="material-symbols-outlined">shopping_bag</span>
+</a>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-8 md:px-16 pt-32 pb-24">
+<!-- Header Section -->
+<header class="mb-12">
+<div class="flex items-end gap-3 mb-2">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Member Center</span>
+</div>
+<h1 class="text-5xl font-headline italic text-primary leading-tight mb-4">訂單詳情</h1>
+<p class="text-on-surface-variant font-body max-w-2xl text-sm tracking-wide">追蹤您的訂購紀錄、物流進度與收件狀態。</p>
+</header>
+<!-- Content Layout -->
+<div class="grid grid-cols-12 gap-12">
+<!-- Side Navigation -->
+<aside class="col-span-12 md:col-span-3">
+<div class="space-y-1">
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_user_all/user_all.html">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">總覽</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 bg-primary text-on-primary rounded-xl font-bold transition-all shadow-lg" href="../froggy_order/order.html">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">訂單詳情</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_booksaving/booksaving.html">
+<span class="material-symbols-outlined group-hover:text-primary">favorite</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">收藏書</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-xl group" href="../froggy_user_info/user_info.html">
+<span class="material-symbols-outlined group-hover:text-primary">edit_note</span>
+<span class="text-[11px] uppercase tracking-[0.2em] group-hover:text-primary">會員資料修改</span>
+</a>
+<div class="h-8"></div>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-error/10 hover:text-error transition-all rounded-xl group" href="#" data-auth-logout>
+<span class="material-symbols-outlined">logout</span>
+<span class="text-[11px] uppercase tracking-[0.2em]">登出</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div id="order-list-container" class="col-span-12 md:col-span-9 space-y-8">
+    <div class="py-20 text-center">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-primary border-t-transparent"></div>
+        <p class="mt-4 font-body text-sm text-on-surface-variant">正在載入您的精品收藏紀錄...</p>
+    </div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#002046]">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center px-12 py-16 w-full max-w-screen-2xl mx-auto">
+<div class="space-y-4 mb-8 md:mb-0">
+<a class="text-xl font-bold text-white font-headline" href="#">froggy書局</a>
+<p class="text-white/70 font-body text-sm">© 2024 froggy書局. 始於筆墨，承載智慧。</p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4">
+</div>
+<div class="mt-8 md:mt-0 flex gap-6">
+</div></div>
+</footer>
+<script src="../../bookstore_JS/auth.js"></script>
+<script>
+    async function updateOrderStatus(orderId, status) {
+        try {
+            const response = await fetch('/api/update-order-status', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ orderId, status })
+            });
+            const result = await response.json();
+            if (result.ok) {
+                loadOrders(); // Refresh list
+            } else {
+                alert('更新失敗：' + result.message);
+            }
+        } catch (error) {
+            console.error('Update status error:', error);
+            alert('連線失敗。');
+        }
+    }
+
+    async function loadOrders() {
+        const currentMember = FroggyAuth.getCurrentMember();
+        const container = document.getElementById('order-list-container');
+        
+        if (!currentMember) {
+            container.innerHTML = `
+                <div class="bg-surface-container-lowest p-12 rounded-2xl border border-outline-variant/30 text-center">
+                    <span class="material-symbols-outlined text-5xl text-on-surface-variant/20 mb-4">lock</span>
+                    <h3 class="text-2xl font-headline italic text-primary">請先登入</h3>
+                    <p class="mt-2 font-body text-sm text-on-surface-variant">登入後即可查看您的訂單詳情。</p>
+                    <a href="../../window_jp/froggy_login/login.html" class="mt-8 inline-block px-8 py-3 bg-primary text-white rounded-lg font-bold text-xs tracking-widest uppercase">前往登入</a>
+                </div>
+            `;
+            return;
+        }
+
+        try {
+            const [orderResp, memberResp] = await Promise.all([
+                fetch(`/api/orders?email=${encodeURIComponent(currentMember.email)}`, { cache: 'no-store' }),
+                fetch('/python/member.json', { cache: 'no-store' })
+            ]);
+            
+            const result = await orderResp.json();
+            const members = await memberResp.json();
+            const member = members.find(m => m.email.toLowerCase() === currentMember.email.toLowerCase());
+            
+            if (!result.ok || !result.orders.length) {
+                container.innerHTML = `
+                    <div class="bg-surface-container-lowest p-12 rounded-2xl border border-outline-variant/30 text-center">
+                        <span class="material-symbols-outlined text-5xl text-on-surface-variant/20 mb-4">receipt_long</span>
+                        <h3 class="text-2xl font-headline italic text-primary">尚無訂單紀錄</h3>
+                        <p class="mt-2 font-body text-sm text-on-surface-variant">目前沒有任何訂購紀錄，快去挑選喜歡的書籍吧！</p>
+                        <a href="../froggy_main/mainscreen.html" class="mt-8 inline-block px-8 py-3 bg-primary text-white rounded-lg font-bold text-xs tracking-widest uppercase">開始選購</a>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+            result.orders.forEach(order => {
+                container.appendChild(createOrderCard(order, member));
+            });
+
+        } catch (error) {
+            console.error('Load orders error:', error);
+            container.innerHTML = `<p class="text-center text-error py-10">資料讀取失敗，請稍後再試。</p>`;
+        }
+    }
+
+    function createOrderCard(order, member) {
+        const date = new Date(order.createdAt).toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
+        const card = document.createElement('div');
+        card.className = "bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/30 shadow-sm space-y-8";
+        
+        const recipient = order.recipient || (member ? member.nickname : '-');
+        const phone = order.phone || (member ? member.phone : '-');
+        const address = order.shippingAddress || (member ? member.address : '-');
+        
+        const statusMap = {
+            'pending_payment': { label: '待付款', color: 'text-secondary', bg: 'bg-secondary/10', step: 1 },
+            'paid': { label: '已付款', color: 'text-secondary', bg: 'bg-secondary/10', step: 2 },
+            'shipped': { label: '已出貨', color: 'text-secondary', bg: 'bg-secondary/10', step: 3 },
+            'completed': { label: '已完成', color: 'text-green-700', bg: 'bg-green-50', step: 4 },
+            'cancelled': { label: '已取消', color: 'text-on-surface-variant/40', bg: 'bg-surface-container-high', step: 0 }
+        };
+        const status = statusMap[order.status] || statusMap['pending_payment'];
+        const isCancelled = order.status === 'cancelled';
+
+        card.innerHTML = `
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-outline-variant/20 pb-6">
+                <div class="grid grid-cols-2 md:flex md:gap-12 gap-y-4 w-full md:w-auto">
+                    <div>
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 mb-1">訂單編號</p>
+                        <p class="text-sm font-bold text-primary">#${order.orderId}</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 mb-1">成立時間</p>
+                        <p class="text-sm font-body">${date}</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 mb-1">訂單總金額</p>
+                        <p class="text-sm font-bold text-secondary">NT$ ${order.totalAmount.toLocaleString()}</p>
+                    </div>
+                </div>
+                <div class="${status.bg} ${status.color} px-4 py-1.5 rounded-full text-[10px] uppercase font-bold tracking-widest border border-current/20">${status.label}</div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-5 flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                    ${order.items.map(item => `
+                        <img alt="book cover" class="w-20 h-28 object-cover rounded shadow-md border border-outline-variant/20 ${isCancelled ? 'grayscale opacity-50' : ''}" src="${item.coverUrl || '../../bookstore_DB/bookPicture/getImage.png'}"/>
+                    `).join('')}
+                </div>
+                <div class="lg:col-span-7 flex flex-col justify-center">
+                    ${isCancelled ? `
+                        <div class="bg-error/5 border border-error/10 p-8 rounded-xl text-center">
+                            <span class="material-symbols-outlined text-error/40 text-4xl mb-2">cancel</span>
+                            <p class="font-headline text-xl italic text-error/60 tracking-widest">訂單已取消 (ORDER CANCELLED)</p>
+                            <p class="text-[10px] text-on-surface-variant/40 mt-2">此訂單的庫存已釋放回書庫。</p>
+                        </div>
+                    ` : `
+                        <div class="flex justify-between items-center px-4 py-6 bg-surface-container-low/30 rounded-xl mb-8 transition-all">
+                            ${['未付款', '已付款', '已出貨', '已完成'].map((label, idx) => `
+                                <div class="flex flex-col items-center gap-2">
+                                    <div class="w-2.5 h-2.5 ${idx < status.step ? 'bg-secondary shadow-[0_0_10px_rgba(150,73,11,0.4)]' : 'bg-outline-variant/40'} rounded-full transition-all duration-500"></div>
+                                    <span class="text-[9px] uppercase tracking-widest ${idx < status.step ? 'text-primary font-bold' : 'text-on-surface-variant/50'}">${label}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `}
+                    <div class="flex justify-end gap-3 mt-auto pt-6">
+                        ${!isCancelled ? `
+                            <button onclick="if(confirm('確定要取消此訂單嗎？庫存將會被釋放。')) updateOrderStatus('${order.orderId}', 'cancelled')" class="text-[10px] uppercase tracking-widest px-6 py-2.5 border border-error/30 text-error/60 hover:bg-error hover:text-white transition-all font-bold rounded">
+                                取消訂單
+                            </button>
+                        ` : ''}
+                        <button data-order-id="${order.orderId}" class="view-detail-btn text-[10px] uppercase tracking-widest px-6 py-2.5 bg-surface-container-high hover:bg-outline-variant/20 transition-colors font-bold text-primary rounded flex items-center gap-2">
+                            <span>查看明細</span>
+                            <span class="material-symbols-outlined text-sm transition-transform duration-300">expand_more</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Expandable Detail -->
+            <div id="detail-${order.orderId}" class="hidden pt-8 border-t border-outline-variant/10">
+                <table class="w-full text-left">
+                    <thead class="border-b border-outline-variant/10">
+                        <tr>
+                            <th class="pb-4 text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-semibold">書籍詳情</th>
+                            <th class="pb-4 text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-semibold text-center">數量</th>
+                            <th class="pb-4 text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-semibold text-right">單價</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant/5">
+                        ${order.items.map(item => `
+                            <tr>
+                                <td class="py-4">
+                                    <div class="flex items-center gap-4">
+                                        <img class="w-12 h-16 object-cover rounded shadow-sm border border-outline-variant/10" src="${item.coverUrl || '../../bookstore_DB/bookPicture/getImage.png'}"/>
+                                        <div>
+                                            <p class="text-sm font-headline italic text-primary">${item.title}</p>
+                                            <p class="text-[10px] text-on-surface-variant/60">${item.author || ''}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 text-sm text-center font-body">${item.quantity}</td>
+                                <td class="py-4 text-sm text-right font-bold text-secondary">NT$ ${Number(item.finalPrice || item.price).toLocaleString()}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                <div class="mt-8 p-6 bg-surface-container-low/50 rounded-xl space-y-4">
+                    <div class="flex items-center gap-2 text-[10px] font-bold text-primary uppercase tracking-widest border-b border-outline-variant/10 pb-2">
+                        <span class="material-symbols-outlined text-sm">local_shipping</span>
+                        <span>收件資訊 (SHIPPING INFO)</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <p class="text-[9px] uppercase tracking-widest text-on-surface-variant/60 mb-1">收件人</p>
+                            <p class="text-sm font-body text-primary">${recipient}</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] uppercase tracking-widest text-on-surface-variant/60 mb-1">聯絡電話</p>
+                            <p class="text-sm font-body text-primary">${phone}</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] uppercase tracking-widest text-on-surface-variant/60 mb-1">配送地址</p>
+                            <p class="text-sm font-body text-primary">${address}</p>
+                        </div>
+                    </div>
+                </div>
+                ${!isCancelled ? `
+                    <div class="mt-8 pt-6 border-t border-outline-variant/10 flex flex-wrap gap-3">
+                        <p class="w-full text-[9px] font-bold text-on-surface-variant/40 uppercase tracking-tighter mb-1">狀態模擬器 (SIMULATOR)</p>
+                        <button onclick="updateOrderStatus('${order.orderId}', 'pending_payment')" class="px-4 py-2 bg-surface-container-highest text-[10px] font-bold text-on-surface-variant rounded hover:bg-secondary hover:text-white transition-all">待付款</button>
+                        <button onclick="updateOrderStatus('${order.orderId}', 'paid')" class="px-4 py-2 bg-surface-container-highest text-[10px] font-bold text-on-surface-variant rounded hover:bg-secondary hover:text-white transition-all">已付款</button>
+                        <button onclick="updateOrderStatus('${order.orderId}', 'shipped')" class="px-4 py-2 bg-surface-container-highest text-[10px] font-bold text-on-surface-variant rounded hover:bg-secondary hover:text-white transition-all">已出貨</button>
+                        <button onclick="updateOrderStatus('${order.orderId}', 'completed')" class="px-4 py-2 bg-surface-container-highest text-[10px] font-bold text-on-surface-variant rounded hover:bg-green-600 hover:text-white transition-all">已完成</button>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+
+        // Bind Detail Toggle
+        const btn = card.querySelector('.view-detail-btn');
+        btn.addEventListener('click', () => {
+            const detail = card.querySelector(`#detail-${order.orderId}`);
+            const icon = btn.querySelector('.material-symbols-outlined');
+            const isHidden = detail.classList.contains('hidden');
+            
+            detail.classList.toggle('hidden');
+            icon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+        });
+
+        return card;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadOrders);
+</script>
+</body></html>
